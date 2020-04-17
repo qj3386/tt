@@ -1,0 +1,26 @@
+{extend name="public/base" /}
+{block name="title"}银行卡校验{/block}
+
+{block name="content"}
+<h2 class="sub-header">银行卡校验</h2>
+
+<form id="addarc" method="post" action="" role="form" enctype="multipart/form-data" class="table-responsive">{:token()}
+<table class="table table-striped table-bordered"><tbody>
+    <tr>
+        <td align="right">银行卡号：</td>
+        <td><input name="bank_card_number" type="text" id="bank_card_number" value="" style="width:30%"></td>
+    </tr>
+    <tr>
+        <td align="right">身份证号：</td>
+        <td><input name="idcard" type="text" id="idcard" value="" style="width:30%"></td>
+    </tr>
+    <tr>
+        <td align="right">姓名：</td>
+        <td><input name="true_name" type="text" id="true_name" value="" style="width:30%"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><button type="submit" class="btn btn-success" value="Submit">提交(Submit)</button>&nbsp;&nbsp;<button type="reset" class="btn btn-default" value="Reset">重置(Reset)</button><input type="hidden"></input></td>
+    </tr>
+</tbody></table></form><!-- 表单结束 -->
+
+{/block}

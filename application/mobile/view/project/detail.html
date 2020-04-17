@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8" />
+<title><?php echo $post['title']; ?></title>
+<meta name="description" content="<?php echo $post['description']; ?>" />
+<meta name="keywords" content="<?php echo $post['keywords']; ?>" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="/css/antui-all.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css"/>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/mobile/public.js"></script>
+{include file="common/header"/}
+</head>
+<body ontouchstart="" style="">
+
+<div class="classreturnbox">
+<div class="classreturn">
+    <div class="ds-in-bl return"><a href="javascript:history.back(-1);"><img src="<?php echo http_host(); ?>/images/mobile/icon_return3.png" alt="返回"></a></div>
+    <div class="ds-in-bl tit center"><span style="vertical-align:middle;">投资详情</span></div>
+</div>
+</div>
+
+<div class="detail">
+<div class="details_top">
+<?php if ($post['cover']) { ?><img class="cover" src="<?php echo $post['cover']; ?>"><?php } ?>
+<h1><?php echo $post['title']; ?></h1>
+<div style="margin-bottom:8px;"><a class="am-button tiny hover" style="margin-right:6px;">保本保息</a><a class="am-button tiny hover">无手续费</a></div>
+<ul>
+<li>
+    <div class="inner">
+        <p>
+            <span class="span2">项目规模</span>
+            <span class="span1">￥<i><?php echo $post['scale']; ?></i>万元</span>
+        </p>
+        <p>
+            <span class="span2">每份分红</span>
+            <span class="span1"><i><?php $daily_earnings = round( ($post['min_buy_money'] * $post['daily_interest']) / 100, 2); echo $daily_earnings; ?></i>元起</span>
+        </p>
+        <p>
+            <span class="span2">投资周期</span>
+            <span class="span1"><i><?php echo $post['term']; ?></i>天</span>
+        </p>
+    </div>
+</li>
+<li>起投金额：<?php echo $post['min_buy_money']; ?>元</li>
+<?php if ($post['max_buy_money'] > 0) { ?><li>最高买入金额：<?php echo $post['max_buy_money']; ?>元</li><?php } ?>
+<li>担保机构：<?php echo $post['guarantee_agency']; ?></li>
+<li>分红方式：<?php echo $post['dividend_mode_text']; ?></li>
+<li style="padding-bottom:0;">投资零风险：100%本金+分红
+    <div class="progressBox1">
+        <div class="progress1" style="width:<?php if ($post['status'] == 1) { echo '100'; } else { echo $post['progress']; } ?>%;"></div>
+        <span class="progressNum1"><?php if ($post['status'] == 1) { echo '100'; } else { echo $post['progress']; } ?>%</span>
+    </div>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="mt10">
+    <div class="am-tab" role="tablist">
+        <a aria-controls="tab-1" class="am-tab-item selected" role="tab"><span style="float:left;margin-left:15px;">投资详情</span></a>
+        <!-- <a aria-controls="tab-2" class="am-tab-item" role="tab"><span>项目资料</span></a> -->
+    </div>
+    <div class="tab-content" style="background-color:#fff;padding:10px;border-top:1px solid #efefef;">
+        <div class="tab-pane" id="tab-1" role="tabpanel">
+            <table class="table" style="display:table;">
+                <tbody>
+                    <tr>
+                        <td><span>项目名称</span></td>
+                        <td><?php echo $post['title']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>项目金额：</td>
+                        <td><i><?php echo $post['scale']; ?>万</i>元人民币；</td>
+                    </tr>
+                    <tr>
+                        <td>每天分红：</td>
+                        <td><i>按每日<?php echo $post['daily_interest']; ?>%的收益（保本保息）</i></td>
+                    </tr>
+                    <tr>
+                        <td>投资金额：</td>
+                        <td><i>最低起投<?php echo $post['min_buy_money']; ?>元</i><?php if ($post['is_repeat'] == 1) { ?>（限买1份）<?php } ?></td>
+                    </tr>
+                    <tr>
+                        <td>项目期限：</td>
+                        <td><i><?php echo $post['term']; ?>个</i>自然日；</td>
+                    </tr>
+                    <tr>
+                        <td>收益计算：</td>
+                        <td><?php $total_revenue = 0; if ($post['dividend_mode'] != 10000) { ?>总收益<?php $total_revenue = round( $daily_earnings * $post['term'], 2 ); echo $total_revenue; ?>元(<i><?php echo $post['min_buy_money']; ?>元*<?php echo $post['daily_interest']; ?>%*<?php echo $post['term']; ?>天</i>) + 本金<?php echo $post['min_buy_money']; ?>元 = 总计本息<?php echo ( $post['min_buy_money'] + round( $daily_earnings * $post['term'], 2 ) ); ?>元；<?php } else { ?>总收益<?php $total_revenue = (round(pow((1 + $post['daily_interest'] * 0.01), $post['term']) * $post['min_buy_money'], 2) - $post['min_buy_money']); echo $total_revenue; ?>元 + 本金<?php echo $post['min_buy_money']; ?>元 = 总计本息<?php echo round(pow((1 + $post['daily_interest'] * 0.01), $post['term']) * $post['min_buy_money'], 2); ?>元；<?php } ?></td>
+                    </tr>
+                    <tr>
+                        <td>还款方式：</td>
+                        <td><?php echo $post['dividend_mode_text']; ?> 节假日照常收益；</td>
+                    </tr>
+                    <tr>
+                        <td>结算时间：</td>
+                        <td>当天投资，当天计算收益分红，满24小时自动结算收益（例如在16:58投资，则在下个自然日16:58收到收益），项目到期系统将当日收益分红和项目本金一起返还到您的会员账号中；</td>
+                    </tr>
+                    <tr>
+                        <td>可投金额：</td>
+                        <td>投资期间只要产品未投满，投资者均可自由投资；</td>
+                    </tr>
+                    <!--<tr>
+                        <td>资金用途：</td>
+                        <td>新手版票体验项目</td>
+                    </tr>-->
+                    <tr>
+                        <td>安全保障：</td>
+                        <td><?php echo $post['guarantee_agency']; ?>对平台上的每一笔投资提供<i>100%本息保障</i>，平台设立风险备用金，对本金承诺全额垫付；</td>
+                    </tr>
+                    <tr>
+                        <td>项目概述：</td>
+                        <td>本项目筹集资金<i><?php echo $post['scale']; ?>万</i>元人民币，投资本项目（总收益<i><?php echo $total_revenue; ?>元</i>）项目周期为<i><?php echo $post['term']; ?></i>个自然日，所筹集资金用于该项目直投运作，作为投资者分红固定且无任何风险，所操作一切风险都由公司与担保公司一律承担，投资者不需要承担任何风险。</td>
+                    </tr>
+                      <tr><td>推荐奖励：</td>
+                        <td>在会员中心最下面(邀请好友)转发到您朋友圈里,只要您朋友通过邀请二维码注册的为一级,充值并成功投资您就可以得到按投资金额<?php echo sysconfig('CMS_FENXIAO_YIJI'); ?>%的奖励,，这个会员又推荐的会员为二级你就有<?php echo sysconfig('CMS_FENXIAO_ERJI'); ?>%，注册成功，系统自动绑定 ！</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane" id="tab-2" role="tabpanel" style="display:none;">
+            <div class="am-article" style="padding:0 5px;">
+                <?php echo $post['content']; ?>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(".am-tab-item").click(function(){
+    $(".am-tab-item").removeClass("selected");
+    $(this).addClass("selected");
+    $(".tab-pane").hide();
+    var aria_controls = $(this).attr("aria-controls");
+    $("#" + aria_controls).show();
+});
+</script>
+
+<div style="height:60px;border-top:1px solid #efefef;z-index:99999;">
+    <div class="am-fixed am-fixed-bottom">
+        <div class="am-button-bottom-container">
+            <?php if ($post['status'] == 1) { echo '<button type="button" class="am-button white hover">项目已满</button>'; } else { ?>
+            <a href="{:url('index/calculator')}?money=<?php echo $post['min_buy_money']; ?>&term=<?php echo $post['term']; ?>&daily_interest=<?php echo $post['daily_interest']; ?>&dividend_mode=<?php echo $post['dividend_mode']; ?>" class="am-button am-button-bottom-secondary">收益计算</a>
+            <a href="{:url('project/buy')}?id=<?php echo $post['id']; ?>" class="am-button am-button-bottom-primary">马上投资</a><?php } ?>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;"><?php echo sysconfig('CMS_SITE_ANALYTICS'); ?></div>
+</body></html>

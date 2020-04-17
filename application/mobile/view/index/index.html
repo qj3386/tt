@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8" />
+<title><?php echo sysconfig('CMS_WEBNAME'); ?></title>
+<meta name="robots" content="noindex,nofollow" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="/css/antui-all.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css"/>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/mobile/public.js"></script>
+{include file="common/header"/}
+</head><body ontouchstart="">
+
+<div style="height:47px;"><div style="width:100%;border-bottom:1px solid #efefef;height:46px;line-height:46px;text-align:center;background:#fff;position:fixed;top:0;z-index:999999;"><a href=""><img style="height:36px;width:auto;margin:5px 0;" src="<?php echo sysconfig('CMS_LOGO_INDEXTOP_IMAGE'); ?>"></a><?php if (!empty($login_info)) { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('user/index')}"><?php if (!empty($login_info['true_name'])) { echo '您好,' . $login_info['true_name']; } else { echo '会员中心'; } ?></a><?php } else { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('login/index')}">注册/登录</a><?php } ?></div></div>
+
+<?php if ($slide_list) { ?>
+<!--顶部滚动广告栏-start-->
+<div class="tbanner">
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+        <?php foreach($slide_list as $k=>$v){ ?>
+            <div class="swiper-slide"><a href="<?php echo $v['url']; ?>"><img src="<?php echo $v['pic']; ?>" alt="<?php echo $v['title']; ?>"></a></div>
+        <?php } ?>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination-white"></div>
+    </div>
+</div>
+<link rel="stylesheet" href="/css/swiper.min.css">
+<script type="text/javascript" src="/js/swiper.min.js"></script>
+<style>
+.swiper-container{width:100%;height:auto;}
+.swiper-slide{text-align:center;font-size:18px;background:#fff;}
+.swiper-slide img{width:100%;height:50vw;}
+</style>
+<script>
+//Swiper轮播
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    paginationClickable: true,
+    autoHeight: true, //enable auto height
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 30,
+    loop: true,
+    centeredSlides: true,
+    autoplay: 3000,
+    autoplayDisableOnInteraction: false
+});
+</script>
+<!--顶部滚动广告栏-end-->
+<?php } ?>
+
+<div class="am-notice" role="alert">
+    <div class="am-notice-content">
+        <marquee scrollamount="3" style="vertical-align:middle;"><?php echo sysconfig('CMS_STATION_NOTICE'); ?></marquee>
+    </div>
+</div>
+
+<a href="https://news.qq.com/zt2020/page/feiyan.htm">
+<img src="/images/mobile/yiqingzuixinjinzhan.png" style="width:100%;height:auto;">
+</a>
+
+<!--菜单-start-->
+<div class="am-grid am-grid-col-4 am-grid-radius" style="border-top:1px solid #f5f5f5;border-bottom:1px solid #f5f5f5;">
+  <a href="<?php echo url('project/index'); ?>" class="am-grid-item">
+    <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue13.png" /></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title">投资项目</div></div>
+  </a>
+  <a href="<?php echo url('page/index'); ?>" class="am-grid-item">
+    <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue14.png" /></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title">关于我们</div></div>
+  </a>
+  <a href="<?php echo url('index/calculator'); ?>" class="am-grid-item">
+    <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue3.png" /></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title">计算器</div></div>
+  </a>
+  <a href="<?php echo url('user/signin'); ?>" class="am-grid-item">
+    <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue7.png" /></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title">每日签到</div></div>
+  </a>
+  <a href="<?php echo url('user_recharge/add'); ?>" class="am-grid-item">
+    <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue8.png" /></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title">我要充值</div></div>
+  </a>
+  <a href="<?php echo url('user_withdraw/add'); ?>" class="am-grid-item">
+    <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue9.png" /></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title">我要提现</div></div>
+  </a>
+  <a href="<?php echo url('user_project/index'); ?>" class="am-grid-item">
+    <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue11.png" /></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title">投资记录</div></div>
+  </a>
+  <a href="<?php echo url('user/referral'); ?>" class="am-grid-item">
+    <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue5.png" /></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title">邀请好友</div></div>
+  </a>
+</div>
+<!--菜单-end-->
+
+<?php if (!session('mobile_user_info')) { ?>
+<div class="am-button-group" role="group" aria-label="">
+  <a class="am-button warn" href="{:url('login/register')}">注册</a>
+  <a class="am-button blue" href="{:url('login/index')}">登录</a>
+</div>
+<?php } ?>
+
+<?php if ($list) { ?>
+<!--项目列表-start-->
+<div class="pro_list mt10">
+<?php foreach ($list as $k=>$v) { ?>
+    <a class="tier" href="{:url('project/detail')}?id=<?php echo $v['id']; ?>">
+        <?php if ($v['cover']) { ?><div class="img-box"><img src="<?php echo $v['cover']; ?>"></div><?php } ?>
+        <div class="info-box">
+            <div class="ib-head"><span class="index">保</span><?php echo $v['title']; ?></div>
+            <div class="ib-body">
+                <div class="cl-3">
+                    <p><span class="red"><?php echo $v['daily_interest']; ?></span>%</p>
+                    <p>日化利率</p>
+                </div>
+                <div class="cl-3">
+                    <p><span class="red"><?php echo round($v['min_buy_money'] * $v['daily_interest'] / 100, 2); ?></span>元</p>
+                    <p>每日分红</p>
+                </div>
+                <div class="cl-3">
+                    <p><span class="red"><?php echo $v['term']; ?></span>天</p>
+                    <p>投资期限</p>
+                </div>
+                <div class="cl-3">
+                    <p>￥<span class="red"><?php echo $v['min_buy_money']; ?></span>元</p>
+                    <p>起投金额</p>
+                </div>
+            </div>
+            <?php if ($v['status'] != 1) { ?>
+            <div class="ib-foot">
+                <div class="text">
+                    <p>项目规模：<?php echo $v['scale']; ?>万元</p>
+                    <p><?php echo $v['dividend_mode_text']; ?></p>
+                </div>
+                <div class="other"><button class="now-btn">立即购买</button></div>
+            </div>
+            <div class="plan">
+                <span>项目进度：</span>
+                <div class="plan-wrap"><div class="plan-con" style="width:<?php echo $v['progress']; ?>%;"></div></div>
+                <span class="plan-text"><?php echo $v['progress']; ?>%</span>
+            </div>
+            <?php } else { ?>
+            <div class="ib-foot">
+                <div class="text">
+                    <p>项目规模：<?php echo $v['scale']; ?>万元</p>
+                    <p><?php echo $v['dividend_mode_text']; ?></p>
+                </div>
+                <div class="other"><button class="now-btn" style="background-color:#888;">项目已满</button></div>
+            </div>
+            <div class="plan">
+                <span>项目进度：</span>
+                <div class="plan-wrap"><div class="plan-con" style="width:100%;background-color:#888;"></div></div>
+                <span class="plan-text">100%</span>
+            </div>
+            <img class="over" src="/images/mobile/soldout.png">
+            <?php } ?>
+        </div>
+    </a>
+<?php } ?>
+</div>
+<!--项目列表-end-->
+<?php } ?>
+
+<div style="padding:0 15px;text-align:center;color:red;font-size:12px;">全国统一服务热线：<?php echo sysconfig('CMS_CONSUMER_HOTLINE'); ?> 官方QQ客服：<?php echo sysconfig('CMS_CONSUMER_QQ'); ?> <?php if (sysconfig('CMS_CONSUMER_QQ_TWO')) { ?>QQ客服②：<?php echo sysconfig('CMS_CONSUMER_QQ_TWO'); ?><?php } ?></div>
+<div style="padding:2px 15px;text-align:center;color:#333;font-size:12px;">Copyright © 2020 &nbsp;<?php echo sysconfig('CMS_COMPANY_NAME'); ?> 版权所有</div>
+<style>.jdb_fot_3 img{height:28px;margin-bottom:2px;}</style>
+<div class="jdb_fot_3" style="text-align:center;padding:2px 5px;margin-bottom:10px;">
+<img src="/images/mobile/auth_ppgw.png">
+<img src="/images/mobile/auth_gwyz.png">
+<img src="/images/mobile/auth_aqwz.png">
+<img src="/images/mobile/label_sm_90020.png">
+<img src="/images/mobile/photo6271805803522533530.jpg">
+<img src="/images/mobile/photo6271805803522533531.jpg">
+</div>
+
+<!-- 回到顶部 -->
+<div class="go_top" id="go_top" style="display:none;display:block;width:24px;height:24px;padding:5px;border-radius:50%;position:fixed;bottom:120px;right:15px;border:1px solid #ccc;background:#f2f2f2;"><img src="/images/mobile/gotop.png" style="width:24px;height:24px;border-radius:50%;overflow:hidden;"></div>
+
+<script>
+$(function(){
+    var ajaxload  = false;
+    var maxpage   = false;
+    var startpage = 1;
+    var totalpage = <?php echo $totalpage; ?>;
+    
+    var tmp_url   = window.location.href;
+    msg = tmp_url.split("#");
+    tmp_url = msg[0];
+    
+    $(window).scroll(function ()
+    {
+        var listheight = $('.pro_list').outerHeight(); 
+        
+        if ($(document).scrollTop() + $(window).height() >= listheight)
+        {
+            if(startpage >= totalpage)
+            {
+                //$("#submit_bt_one").html("已是最后一页，没有更多数据！");
+                return false;
+            }
+            
+            if(!ajaxload && !maxpage)
+            {
+                ajaxload = true;
+                //$("#submit_bt_one").html("努力加载中...");
+                var url = tmp_url;
+                var nextpage = startpage+1;
+                
+                $.get(url,{page_ajax:1,page:nextpage},function(res)
+                {
+                    if(res)
+                    {
+                        $('.pro_list').append(res);
+                        startpage++;
+                        
+                        if(startpage >= totalpage)
+                        {
+                            maxpage = true;
+                            //$("#submit_bt_one").html("已是最后一页，没有更多数据！");
+                        }
+                        else
+                        {
+                            //$("#submit_bt_one").html("点击加载更多");
+                        }
+                        
+                        ajaxload = false;
+                    }
+                    else
+                    {
+                        //$("#submit_bt_one").html("请求失败，请稍候再试！");
+                        ajaxload = false;
+                    }
+                },'json');
+            }
+        }
+    });
+});
+</script>
+
+<div class="appdown" style="width:100%;height:40px;background-color:rgba(0, 0, 0, 0.5);position:fixed;bottom:52px;">
+	<div style="width:40px;height:40px;float:left;margin:0 5px;">
+		<img src="<?php echo sysconfig('CMS_LOGO_INDEXBOTTOM_IMAGE'); ?>" style="width:36px;height:36px;margin-top:2px;">
+	</div>
+	<div style="width:130px;line-height:15px;float:left;left:50px;color:#fff;margin:5px 0;font-size:12px;">
+		<?php echo sysconfig('CMS_WEBNAME'); ?>官网<br><?php echo sysconfig('CMS_SLOGAN'); ?>
+	</div>
+	<div style="width:40px;height:40px;float:right;" onclick="$('.appdown').hide();">
+		<a href="javascript:;" style="display:block;width:40px;line-height:40px;font-size:28px;cursor:pointer;color:#fff;text-align:center;">×</a>
+	</div>
+	<div style="width:90px;height:40px;float:right;">
+		<a href="<?php echo sysconfig('CMS_APP_DOWNLOAD_URL'); ?>" style="display:block;width:80px;height:28px;line-height:28px;margin:6px 5px;text-align:center;border-radius:5px;background-color:#FD5A21;color:#fff;font-size:14px;">下载APP</a>
+	</div>
+</div>
+
+<?php if (sysconfig('CMS_HOME_ACTIVITY_STATUS') == 1) { ?>
+<!-- 活动弹窗start -->
+<div class="huodongbg" style="width:100%;height:100%;position:fixed;top: 0;left:0;background-color:rgba(0,0,0,0.35);z-index:9999999;">
+	<div style="width:300px;height:200px;position:fixed;top:0;left:0;right:0;bottom:0;margin:auto;background-color:#666;">
+		<a href="javascript:;" onclick="huodong_hide()" style="width:110px;height:25px;line-height:25px;text-align:center;position:absolute;right:8px;top:8px;border:1px solid #fff;color:#fff;border-radius:5px;">关闭活动广告</ a>
+		<a href="<?php echo sysconfig('CMS_HOME_ACTIVITY_URL'); ?>"><img src="<?php echo sysconfig('CMS_HOME_ACTIVITY_IMAGE'); ?>" width="300px" height="200px" /></a>
+	</div>
+</div>
+<!-- 活动弹窗end -->
+<?php } ?>
+
+{include file="common/footer"/}
+<div style="display:none;"><?php echo sysconfig('CMS_SITE_ANALYTICS'); ?></div>
+
+<script>
+if (sessionStorage.getItem('huodongbg_hide')) {
+	$('.huodongbg').hide();
+}
+function huodong_hide()
+{
+	$('.huodongbg').hide();
+	sessionStorage.setItem('huodongbg_hide', '1');
+}
+</script>
+</body></html>

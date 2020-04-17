@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8" />
+<title><?php if (isset($post['name'])) { echo $post['name']; } else { echo '投资项目'; } ?></title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="/css/antui-all.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css"/>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/mobile/public.js"></script>
+{include file="common/header"/}
+</head>
+<body ontouchstart="">
+
+<div class="classreturnbox">
+<div class="classreturn">
+    <div class="ds-in-bl return"><a href="javascript:history.back(-1);"><img src="<?php echo http_host(); ?>/images/mobile/icon_return3.png" alt="返回"></a></div>
+    <div class="ds-in-bl tit center"><span style="vertical-align:middle;"><?php if (isset($post['name'])) { echo $post['name']; } else { echo '投资项目'; } ?></span></div>
+</div>
+</div>
+
+<?php if ($list) { ?>
+<!--项目列表-start-->
+<div class="pro_list mt10">
+<?php foreach ($list as $k=>$v) { ?>
+    <a class="tier" href="{:url('project/detail')}?id=<?php echo $v['id']; ?>">
+        <?php if ($v['cover']) { ?><div class="img-box"><img src="<?php echo $v['cover']; ?>"></div><?php } ?>
+        <div class="info-box">
+            <div class="ib-head"><span class="index">保</span><?php echo $v['title']; ?></div>
+            <div class="ib-body">
+                <div class="cl-3">
+                    <p><span class="red"><?php echo $v['daily_interest']; ?></span>%</p>
+                    <p>日化利率</p>
+                </div>
+                <div class="cl-3">
+                    <p><span class="red"><?php echo round($v['min_buy_money'] * $v['daily_interest'] / 100, 2); ?></span>元</p>
+                    <p>每日分红</p>
+                </div>
+                <div class="cl-3">
+                    <p><span class="red"><?php echo $v['term']; ?></span>天</p>
+                    <p>投资期限</p>
+                </div>
+                <div class="cl-3">
+                    <p>￥<span class="red"><?php echo $v['min_buy_money']; ?></span>元</p>
+                    <p>起投金额</p>
+                </div>
+            </div>
+            <?php if ($v['status'] != 1) { ?>
+            <div class="ib-foot">
+                <div class="text">
+                    <p>项目规模：<?php echo $v['scale']; ?>万元</p>
+                    <p><?php echo $v['dividend_mode_text']; ?></p>
+                </div>
+                <div class="other"><button class="now-btn">立即购买</button></div>
+            </div>
+            <div class="plan">
+                <span>项目进度：</span>
+                <div class="plan-wrap"><div class="plan-con" style="width:<?php echo $v['progress']; ?>%;"></div></div>
+                <span class="plan-text"><?php echo $v['progress']; ?>%</span>
+            </div>
+            <?php } else { ?>
+            <div class="ib-foot">
+                <div class="text">
+                    <p>项目规模：<?php echo $v['scale']; ?>万元</p>
+                    <p><?php echo $v['dividend_mode_text']; ?></p>
+                </div>
+                <div class="other"><button class="now-btn" style="background-color:#888;">项目已满</button></div>
+            </div>
+            <div class="plan">
+                <span>项目进度：</span>
+                <div class="plan-wrap"><div class="plan-con" style="width:100%;background-color:#888;"></div></div>
+                <span class="plan-text">100%</span>
+            </div>
+            <img class="over" src="/images/mobile/soldout.png">
+            <?php } ?>
+        </div>
+    </a>
+<?php } ?>
+</div>
+<!--项目列表-end-->
+<?php } ?>
+
+<!-- 回到顶部 -->
+<div class="go_top" id="go_top" style="display:none;display:block;width:24px;height:24px;padding:5px;border-radius:50%;position:fixed;bottom:120px;right:15px;border:1px solid #ccc;background:#f2f2f2;"><img src="/images/mobile/gotop.png" style="width:24px;height:24px;border-radius:50%;overflow:hidden;"></div>
+
+<script>
+$(function(){
+    var ajaxload  = false;
+    var maxpage   = false;
+    var startpage = 1;
+    var totalpage = <?php echo $totalpage; ?>;
+    
+    var tmp_url   = window.location.href;
+    msg = tmp_url.split("#");
+    tmp_url = msg[0];
+    
+    $(window).scroll(function ()
+    {
+        var listheight = $('.pro_list').outerHeight(); 
+        
+        if ($(document).scrollTop() + $(window).height() >= listheight)
+        {
+            if(startpage >= totalpage)
+            {
+                //$("#submit_bt_one").html("已是最后一页，没有更多数据！");
+                return false;
+            }
+            
+            if(!ajaxload && !maxpage)
+            {
+                ajaxload = true;
+                //$("#submit_bt_one").html("努力加载中...");
+                var url = tmp_url;
+                var nextpage = startpage+1;
+                
+                $.get(url,{page_ajax:1,page:nextpage},function(res)
+                {
+                    if(res)
+                    {
+                        $('.pro_list').append(res);
+                        startpage++;
+                        
+                        if(startpage >= totalpage)
+                        {
+                            maxpage = true;
+                            //$("#submit_bt_one").html("已是最后一页，没有更多数据！");
+                        }
+                        else
+                        {
+                            //$("#submit_bt_one").html("点击加载更多");
+                        }
+                        
+                        ajaxload = false;
+                    }
+                    else
+                    {
+                        //$("#submit_bt_one").html("请求失败，请稍候再试！");
+                        ajaxload = false;
+                    }
+                },'json');
+            }
+        }
+    });
+});
+</script>
+{include file="common/footer"/}
+<div style="display:none;"><?php echo sysconfig('CMS_SITE_ANALYTICS'); ?></div>
+</body></html>
