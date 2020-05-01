@@ -28,12 +28,28 @@ window.addEventListener('resize', function() {
 </div>
 </div>
 
+<div class="referral" style="background:url('/images/mobile/yaoqinghaoyoubg.jpg') no-repeat;background-size:100% 100%;height:100vw;">
+	<div><div id="qrcode" class="qrcode" style="width:140px;margin-top:90px;margin-left:10px;background:#fff;padding:1px;"></div></div>
+    <script type="text/javascript">
+        //new QRCode(document.getElementById("qrcode"), "");  // 设置要生成二维码的链接
+        var qrcode = new QRCode('qrcode', {
+            text: "<?php echo url('login/register').'?invite_code=' . $login_info['mobile']; ?>",
+            width: '100',
+            height: '100',
+            colorDark : '#000000',
+            colorLight : '#ffffff',
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    </script>
+</div>
+
 <style>
 .referral{padding:15px;background-color:#fff;}
 .referral .qrcode img,.referral .qrcode canvas{width:100%;height:auto;display:block;}
 .referral .title{color:#000;text-align:center;line-height:1.5;}
 .banner_tit{font-size:18px;font-weight:400;background-color:#fff;color:#f23030;height:46px;line-height:46px;padding-left:10px;padding-right:10px;border-bottom:1px solid #eee;border-top:10px solid #f1f1f1;text-align:center;}
 </style>
+<!-- <div><img src="/images/mobile/yaoqinghaoyou.jpg" style="width:100%;height:auto;"></div>
 <div class="referral">
 	<div class="title" style="font-size:22px;color:#000000;text-align:center;line-height:1.5;">个人专属推荐二维码</div>
 	<div><div id="qrcode" class="qrcode" style="width:60%;margin:10px auto;"></div></div>
@@ -49,9 +65,9 @@ window.addEventListener('resize', function() {
             correctLevel : QRCode.CorrectLevel.H
         });
     </script>
-</div>
+</div> -->
 
-<div class="banner_tit">我的推荐记录</div>
+<div class="banner_tit">邀请列表</div>
 <?php if ($list) { ?>
 <div class="am-list am-list-twoline" style="padding-top:0;">
 <?php foreach($list as $k=>$v){ ?>

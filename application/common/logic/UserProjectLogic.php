@@ -375,6 +375,15 @@ class UserProjectLogic extends BaseLogic
                     Db::rollback();
                     continue;
                 }
+				
+				//自动复投
+				/* if ($user_project['money'] >= 8000 && $user['is_auto_reinvest'] == 1) {
+                    //用户投资项目
+					$add_data['user_id'] = $user['id'];
+					$add_data['project_id'] = 391;
+					$add_data['money'] = $user_project['money'];
+					logic('UserProject')->add($add_data);
+                } */
             }
 
             // 提交事务

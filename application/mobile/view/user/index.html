@@ -30,7 +30,7 @@ window.addEventListener('resize', function() {
             <div class="am-list-content">
                 <div class="am-list-title am-list-cell-twocolumn">
                     <div class="am-list-title" style="color:#fff;margin-bottom:0;"><a style="color:#fff;" href="<?php echo url('user/setting'); ?>"><?php if ($login_info['true_name']) { echo $login_info['true_name']; } elseif ($login_info['mobile']) { echo substr_replace($login_info['mobile'],'****',3,4); } else { echo $login_info['user_name']; } ?></a>
-					<?php if (!empty($login_info['true_name']) && !empty($login_info['idcard'])) { if (!empty($login_info['user_rank_text'])) { ?><span style="color:#e8a010;font-size:12px;"><?php if (!empty($login_info['user_rank_text'])) { echo $login_info['user_rank_text']; } ?></span><?php } } else { ?><a style="color:#e8a010;font-size:12px;" href="{:url('user/certification')}">未认证</a><?php } ?></div>
+					<?php if (!empty($login_info['true_name']) && !empty($login_info['idcard'])) { if (!empty($login_info['user_rank_text'])) { ?><a href="{:url('page/detail')}?id=huiyuandengji" style="color:#FFCC00;font-size:12px;"><?php if (!empty($login_info['user_rank_text'])) { echo $login_info['user_rank_text']; } ?></a><?php } } else { ?><a style="color:#e8a010;font-size:12px;" href="{:url('user/certification')}">未认证</a><?php } ?></div>
                     <div class="am-list-right-brief"></div>
                 </div>
                 <div class="am-list-brief" style="color:#99CCFF;">注册时间：<?php echo date('Y-m-d', $login_info['add_time']); ?></div>

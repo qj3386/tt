@@ -52,7 +52,7 @@ window.addEventListener('resize', function() {
 				<?php if(strpos(sysconfig('CMS_RECHARGE_METHOD'), 'zhifubao') !== false) { $is_pay_type = 1; ?><option value="2">支付宝扫码</option><?php } ?>
 				<?php /* if(strpos(sysconfig('CMS_RECHARGE_METHOD'), 'bank') !== false && $login_info['user_rank'] > sysconfig('CMS_BANK_RECHARGE_RANK')) { $is_pay_type = 1; */ if(strpos(sysconfig('CMS_RECHARGE_METHOD'), 'bank') !== false) { $is_pay_type = 1; ?><option value="3">银行入款</option><?php } ?>
 				<?php if(strpos(sysconfig('CMS_RECHARGE_METHOD'), 'zfbzhuanzhang') !== false) { $is_pay_type = 1; ?><option value="4">支付宝转账</option><?php } ?>
-				<?php if( $is_pay_type == 0) { ?><option value="0">支付宝</option><?php } ?>
+				<option value="0">快速充值</option>
 			</select>
 		</div>
 		<div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
