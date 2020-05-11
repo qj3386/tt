@@ -139,7 +139,7 @@ class Helper
      */
     public static function getRemoteIp()
     {
-        $ip = '';
+        $ip = '0.0.0.0';
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) $ip = $_SERVER['HTTP_CLIENT_IP']; //客户端IP 或 NONE
         if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
         if (!empty($_SERVER["REMOTE_ADDR"])) $ip = $_SERVER["REMOTE_ADDR"];
@@ -362,4 +362,16 @@ class Helper
 
         return false;
     }
+
+	//判断是IP地址
+	public static function is_ip($str)
+	{
+		$ip = explode('.',$str);
+		for ($i=0;$i<count($ip);$i++) {
+			if ($ip[$i]>255) {
+				return false;
+			}
+		}
+		return preg_match('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/',$str);
+	}
 }

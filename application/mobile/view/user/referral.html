@@ -33,7 +33,7 @@ window.addEventListener('resize', function() {
     <script type="text/javascript">
         //new QRCode(document.getElementById("qrcode"), "");  // 设置要生成二维码的链接
         var qrcode = new QRCode('qrcode', {
-            text: "<?php echo url('login/register').'?invite_code=' . $login_info['mobile']; ?>",
+            text: "<?php echo sysconfig('CMS_APP_DOWNLOAD_URL'); /* echo url('login/register').'?invite_code=' . $login_info['mobile']; */ ?>",
             width: '100',
             height: '100',
             colorDark : '#000000',
@@ -66,6 +66,27 @@ window.addEventListener('resize', function() {
         });
     </script>
 </div> -->
+
+<div class="am-grid am-grid-col-3">
+  <a href="javascript:;" class="am-grid-item">
+    <div class="am-grid-item-content">
+      <div class="am-grid-item-title"><?php echo $count; ?></div>
+      <div class="am-grid-item-desc">邀请人数</div>
+    </div>
+  </a>
+  <a href="javascript:;" class="am-grid-item">
+    <div class="am-grid-item-content">
+      <div class="am-grid-item-title"><?php echo round($yijijiangli, 2); ?>元</div>
+      <div class="am-grid-item-desc">一级邀请奖励</div>
+    </div>
+  </a>
+  <a href="javascript:;" class="am-grid-item">
+    <div class="am-grid-item-content">
+      <div class="am-grid-item-title"><?php echo round($erjijiangli, 2); ?>元</div>
+      <div class="am-grid-item-desc">二级邀请奖励</div>
+    </div>
+  </a>
+</div>
 
 <div class="banner_tit">邀请列表</div>
 <?php if ($list) { ?>

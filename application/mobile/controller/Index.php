@@ -35,6 +35,11 @@ class Index extends Common
      */
     public function index()
     {
+		$add_data['user_id'] = 100002;
+					$add_data['project_id'] = db('project')->where(['min_buy_money'=>['<',50000],'status'=>0,'dividend_mode'=>0])->order(['min_buy_money'=>'desc'])->value('id');
+					$add_data['money'] = 50000;
+					var_dump(logic('UserProject')->add($add_data));
+					exit;
         $uri = $_SERVER["REQUEST_URI"]; //获取当前url的参数
 
         //分享到首页，把推荐码invite_code存下来
