@@ -38,7 +38,7 @@ class Goods extends Base
         if (isset($_REQUEST["type_id"]) && $_REQUEST["type_id"] > 0) {
             $where['type_id'] = $_REQUEST["type_id"];
         }
-        $list = $this->getLogic()->getPaginate($where, ['update_time' => 'desc'], ['content']);
+        $list = $this->getLogic()->getPaginate($where, ['sign_num' => 'asc'], ['content']);
 
         $this->assign('page', $list->render());
         $this->assign('list', $list);

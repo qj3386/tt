@@ -25,6 +25,7 @@ class Goods extends Common
         if(input('status', '') != ''){$param['status'] = input('status');}
         if(input('is_promote', '') != ''){$param['is_promote'] = input('is_promote');}
         if(input('orderby', '') != ''){$param['orderby'] = input('orderby');}
+		$param['orderby'] = 4;
         $param['max_price'] = 99999;if(input('max_price', '') != ''){$param['max_price'] = input('max_price');}
         $param['min_price'] = 0;if(input('min_price', '') != ''){$param['min_price'] = input('min_price');}
         if(input('brand_id', '') != ''){$param['brand_id'] = input('brand_id');}
@@ -48,15 +49,10 @@ class Goods extends Common
                 foreach($res['data']['list'] as $k => $v)
                 {
                     $html .= '<li><a href="'.url('goods/detail').'?id='.$v['id'].'">';
-					if($v['is_promote']>0)
-					{
-						$html .= '<span class="label">限时抢购</span>';
-					}
 					$html .= '<img alt="'.$v['title'].'" src="'.$v['litpic'].'">';
 					$html .= '<div class="ll-list-info">';
 					$html .= '<p class="ll-list-tit2">'.$v['title'].'</p>';
-					$html .= '<p class="ll-list-click">'.$v['click'].'人查看</p>';
-					$html .= '<div class="ll-list-price"><span class="price">￥'.$v['price'].'</span> <span class="market-price">￥'.$v['market_price'].'</span></div>';
+					$html .= '<div class="ll-list-price"><span class="price" style="font-size:16px;">立即兑换</span></div>';
 					$html .= '</div></a></li>';
                 }
             }
@@ -81,29 +77,6 @@ class Goods extends Common
 		$res = Util::curl_request($url, $get_data, 'GET');
 		if(empty($res['data'])){Helper::http404();}
         $post = $res['data'];
-        //判断用户是否收藏该商品，0未收藏，1已收藏
-		$post['is_collect'] = 0;
-        if($this->login_info)
-		{
-			$get_data = array(
-				'goods_id' => $id,
-				'access_token' => $this->login_info['token']['token']
-			);
-			$url = get_api_url_address().'/user_goods_collect/detail';
-			$res = Util::curl_request($url, $get_data, 'GET');
-			if($res['code'] == ReturnData::SUCCESS || !empty($res['data'])){$post['is_collect'] = 1;}
-		}
-        //添加浏览记录
-        if($this->login_info)
-        {
-            $post_data = array(
-                'goods_id'  => $id,
-                'access_token' => $this->login_info['token']['token']
-            );
-            $url = get_api_url_address().'/user_goods_history/add';
-            Util::curl_request($url, $post_data, 'POST');
-        }
-        
 		$assign_data['post'] = $post;
         $this->assign($assign_data);
         return $this->fetch();

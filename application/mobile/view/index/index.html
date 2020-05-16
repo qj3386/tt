@@ -23,7 +23,7 @@ window.addEventListener('resize', function() {
 {include file="common/header"/}
 </head><body ontouchstart="">
 
-<div style="height:47px;"><div style="width:100%;border-bottom:1px solid #efefef;height:46px;line-height:46px;text-align:center;background:#fff;position:fixed;top:0;z-index:999999;"><a href=""><img style="height:36px;width:auto;margin:5px 0;" src="<?php echo sysconfig('CMS_LOGO_INDEXTOP_IMAGE'); ?>"></a><?php if (!empty($login_info)) { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('user/index')}"><?php if (!empty($login_info['true_name'])) { echo '您好,' . $login_info['true_name']; } else { echo '会员中心'; } ?></a><?php } else { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('login/index')}">注册/登录</a><?php } ?></div></div>
+<div style="height:47px;"><div style="width:100%;border-bottom:1px solid #efefef;height:46px;line-height:46px;text-align:center;background:#fff;position:fixed;top:0;z-index:999999;"><a style="position:absolute;left:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('goods/index')}">商城</a><a href=""><img style="height:36px;width:auto;margin:5px 0;" src="<?php echo sysconfig('CMS_LOGO_INDEXTOP_IMAGE'); ?>"></a><?php if (!empty($login_info)) { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('user/index')}"><?php if (!empty($login_info['true_name'])) { echo '您好,' . $login_info['true_name']; } else { echo '会员中心'; } ?></a><?php } else { ?><a style="position:absolute;right:10px;font-size:14px;color:#108ee9;letter-spacing:1px;" href="{:url('login/index')}">注册/登录</a><?php } ?></div></div>
 
 <?php if ($slide_list) { ?>
 <!--顶部滚动广告栏-start-->
@@ -274,7 +274,7 @@ $(function(){
 <!-- 活动弹窗start -->
 <div class="huodongbg" style="width:100%;height:100%;position:fixed;top: 0;left:0;background-color:rgba(0,0,0,0.35);z-index:9999999;">
 	<div style="width:300px;height:200px;position:fixed;top:0;left:0;right:0;bottom:0;margin:auto;background-color:#666;">
-		<a href="javascript:;" onclick="huodong_hide()" style="width:110px;height:25px;line-height:25px;text-align:center;position:absolute;right:8px;top:8px;border:1px solid #fff;color:#fff;border-radius:5px;">关闭活动广告</ a>
+		<a href="javascript:;" onclick="huodong_hide()" style="width:110px;height:25px;line-height:25px;text-align:center;position:absolute;right:8px;top:8px;border:1px solid #fff;color:#fff;border-radius:5px;">关闭</a>
 		<a href="<?php echo sysconfig('CMS_HOME_ACTIVITY_URL'); ?>"><img src="<?php echo sysconfig('CMS_HOME_ACTIVITY_IMAGE'); ?>" width="300px" height="200px" /></a>
 	</div>
 </div>

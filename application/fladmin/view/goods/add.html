@@ -21,15 +21,15 @@
         <td colspan="2"><input name="price" type="text" id="price" style="width:100px" value="">&nbsp;&nbsp; <font color="red">*</font>原价：<input name="market_price" type="text" id="market_price" style="width:100px" value="">&nbsp;&nbsp; <font color="red">*</font>库存：<input name="goods_number" type="text" id="goods_number" style="width:60px" value="">&nbsp;&nbsp; 浏览次数：<input type="text" name="click" id="click" value="<?php echo rand(200,500); ?>" style="width:60px;"></td>
     </tr>
 	<tr>
+        <td align="right"><font color="red">*</font>签到：</td>
+        <td colspan="2"><input class="required" name="sign_num" type="text" id="sign_num" style="width:100px" value="1">&nbsp;&nbsp; 累计消费：<input name="consumption" type="text" id="consumption" style="width:100px" value="1">&nbsp;&nbsp; 抵扣金额：<input class="required" name="deduction_amount" type="text" id="deduction_amount" style="width:100px" value="1"></td>
+    </tr>
+	<tr>
         <td align="right">上架：</td>
         <td>
 			<input type="radio" value='0' name="status" checked />&nbsp;是&nbsp;&nbsp;
 			<input type="radio" value='1' name="status" />&nbsp;否
 		</td>
-    </tr>
-    <tr>
-        <td align="right">活动价：</td>
-        <td colspan="2"><input name="promote_price" type="text" id="promote_price" style="width:80px" value="">&nbsp;&nbsp; 活动开始日期：<input autocomplete="off" name="promote_start_date" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" id="promote_start_date" style="width:185px" value="">&nbsp;&nbsp; 活动结束日期：<input autocomplete="off" name="promote_end_date" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" id="promote_end_date" style="width:185px" value=""></td>
     </tr>
     <tr>
         <td align="right">推荐：</td>

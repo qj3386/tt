@@ -1,51 +1,73 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-<title>商品列表</title><meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport">
-<link href="<?php echo http_host(); ?>/css/weixin/style.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="<?php echo http_host(); ?>/js/jquery.min.js"></script><script type="text/javascript" src="<?php echo http_host(); ?>/js/weixin/mobile.js"></script>
-<meta name="keywords" content="关键词"><meta name="description" content="描述"></head><body style="background-color:#ffffff;">
-<div class="classreturn loginsignup">
-    <div class="ds-in-bl return"><a href="javascript:history.back(-1);"><img src="<?php echo http_host(); ?>/images/weixin/return.png" alt="返回"></a></div>
-    <div class="ds-in-bl tit center"><span>商品列表</span></div>
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8" />
+<title>积分商城</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="/css/antui-all.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css"/>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/layer/mobile/layer.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/mobile/public.js"></script>
+{include file="common/header"/}
+</head>
+<body ontouchstart="">
+
+<div class="classreturnbox">
+<div class="classreturn">
+    <div class="ds-in-bl return"><a href="javascript:history.back(-1);"><img src="<?php echo http_host(); ?>/images/mobile/icon_return3.png" alt="返回"></a></div>
+    <div class="ds-in-bl tit center"><span style="vertical-align:middle;">积分商城</span></div>
+</div>
 </div>
 
-<nav class="storenav">
-    <ul class="table-cell">
-        <li<?php if(!isset($_REQUEST['orderby'])){echo ' class="red"';} ?>>
-            <a href="<?php $complexorder = $request_param; unset($complexorder['orderby']); echo url('goods/index').'?'.http_build_query($complexorder); ?>">
-                <span class="lb">综合</span>
-            </a>
-        </li>
-        <li<?php if(isset($_REQUEST['orderby']) && $_REQUEST['orderby']==1){echo ' class="red"';} ?>>
-            <a href="<?php $saleorder = $request_param;$saleorder['orderby']=1;echo url('goods/index').'?'.http_build_query($saleorder); ?>">
-                <span class="dq">销量</span>
-            </a>
-        </li>
-        <li<?php if((isset($_REQUEST['orderby']) && ($_REQUEST['orderby']==3 || $_REQUEST['orderby']==4))){echo ' class="red"';} ?>>
-            <a href="<?php $priceorder = $request_param; if(isset($_REQUEST['orderby']) && $_REQUEST['orderby']==3){ $priceorder['orderby']=4; }else{ $priceorder['orderby']=3; } echo url('goods/index').'?'.http_build_query($priceorder); ?>">
-                <span class="jg">价格 </span>
-                <i class="pr<?php if(isset($_REQUEST['orderby']) && $_REQUEST['orderby']==3){echo ' bpr1';}elseif(isset($_REQUEST['orderby']) && $_REQUEST['orderby']==4){echo ' bpr2';} ?>"></i>
-            </a>
-        </li>
-    </ul><div class="cl"></div>
-</nav>
+<?php if (sysconfig('CMS_MALL_NOTICE')) { ?>
+<div class="am-notice" role="alert">
+    <div class="am-notice-content">
+        <marquee scrollamount="3" style="vertical-align:middle;"><?php echo sysconfig('CMS_MALL_NOTICE'); ?></marquee>
+    </div>
+</div>
+<?php } ?>
 
-<div class="floor" style="margin-top:15px;">
+<div class="floor">
     <?php if($goods_list){ ?>
     <ul class="ll-list" id="goods-list">
     <?php foreach($goods_list as $k=>$v){ ?>
 	<li><a href="<?php echo url('goods/detail').'?id='.$v['id']; ?>">
-		<?php if($v['is_promote']>0){ ?><span class="label">限时抢购</span><?php } ?>
 		<img alt="<?php echo $v['title']; ?>" src="<?php echo $v['litpic']; ?>">
 		<div class="ll-list-info">
 			<p class="ll-list-tit2"><?php echo $v['title']; ?></p>
-			<p class="ll-list-click"><?php echo $v['click']; ?>人查看</p>
-			<div class="ll-list-price"><span class="price">￥<?php echo $v['price']; ?></span> <span class="market-price">￥<?php echo $v['market_price']; ?></span></div>
+			<div class="ll-list-price"><span class="price" style="font-size:16px;">立即兑换</span></div>
 		</div>
 	</a></li>
     <?php } ?>
     </ul><?php }else{ ?>
     <div style="text-align:center;line-height:40px;color:#999;">暂无记录</div><?php } ?>
 </div>
+
+<style>
+.ll-list{padding:15px 15px 0 15px;overflow:hidden;background-color:#ffffff;}
+.ll-list li{margin-bottom:15px;padding-bottom:10px;width:50%;float:left;}
+.ll-list li a{position:relative;display:block;margin-right:8px;overflow:hidden;}
+.ll-list li:nth-child(even) a{margin-right:0;margin-left:8px;}
+.ll-list li img{border-radius:4px;width:100%;height:46vw;}
+.ll-list .ll-list-tit{margin-top:8px;color:#333;font-size:14px;line-height:22px;white-space:nowrap;overflow:hidden;}
+.ll-list .ll-list-tit2{margin-top:8px;color:#333;font-size:14px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;height:40px;line-height:20px;overflow:hidden;}
+.ll-list .label{font-size:12px;position:absolute;color:#fff;background:#ff3333;display:inline-block;border-bottom-right-radius:5px;padding:0 4px;text-align:center;font-size:12px;}
+.ll-list .ll-list-click{color:#aaaaaa;font-size:12px;}
+.ll-list .ll-list-price{height:30px;line-height:32px;font-size:16px;color:#484848;}
+.ll-list .ll-list-price .price{font-size:18px;color:#ff3333;}
+.ll-list .ll-list-price .market-price{font-size:12px;color:#aaaaaa;text-decoration:line-through;}
+</style>
 
 <script>
 $(function(){
@@ -106,6 +128,17 @@ $(function(){
         }
     });
 });
+
+<?php if (empty($login_info)) { ?>
+layer.open({
+  content: '请先登录',
+  btn: '确定',
+  shadeClose: false,
+  yes: function(){
+    window.location.href = "<?php echo url('login/index'); ?>";
+  }
+});
+<?php } ?>
 </script>
 {include file="common/footer"/}
 </body></html>

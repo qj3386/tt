@@ -21,15 +21,15 @@
         <td colspan="2"><input name="price" type="text" id="price" style="width:100px" value="<?php echo $post["price"]; ?>">&nbsp;&nbsp; <font color="red">*</font>原价：<input name="market_price" type="text" id="market_price" style="width:100px" value="<?php echo $post["market_price"]; ?>">&nbsp;&nbsp; <font color="red">*</font>库存：<input name="goods_number" type="text" id="goods_number" style="width:60px" value="<?php echo $post["goods_number"]; ?>">&nbsp;&nbsp; 浏览次数：<input type="text" name="click" id="click" value="<?php echo $post["click"]; ?>" style="width:60px;"></td>
     </tr>
 	<tr>
+        <td align="right"><font color="red">*</font>签到：</td>
+        <td colspan="2"><input class="required" name="sign_num" type="text" id="sign_num" style="width:100px" value="<?php echo $post["sign_num"]; ?>">&nbsp;&nbsp; 累计消费：<input class="required" name="consumption" type="text" id="consumption" style="width:100px" value="<?php echo $post["consumption"]; ?>">&nbsp;&nbsp; 抵扣金额：<input class="required" name="deduction_amount" type="text" id="deduction_amount" style="width:100px" value="<?php echo $post["deduction_amount"]; ?>"></td>
+    </tr>
+	<tr>
         <td align="right">上架：</td>
         <td>
 			<input type="radio" value='0' name="status" <?php if($post['status']==0){echo 'checked';} ?> />&nbsp;是&nbsp;&nbsp;
 			<input type="radio" value='2' name="status" <?php if($post['status']==2){echo 'checked';} ?> />&nbsp;否
 		</td>
-    </tr>
-    <tr>
-        <td align="right">活动价：</td>
-        <td colspan="2"><input autocomplete="off" name="promote_price" type="text" id="promote_price" style="width:80px" value="<?php if($post['promote_price']>0){echo $post['promote_price'];} ?>">&nbsp;&nbsp; 活动开始日期：<input autocomplete="off" name="promote_start_date" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" id="promote_start_date" style="width:185px" value="<?php echo $post['promote_start_date']; ?>">&nbsp;&nbsp; 活动结束日期：<input autocomplete="off" name="promote_end_date" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" id="promote_end_date" style="width:185px" value="<?php echo $post['promote_end_date']; ?>"></td>
     </tr>
     <tr>
         <td align="right">推荐：</td>
