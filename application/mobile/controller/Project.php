@@ -71,8 +71,14 @@ class Project extends Common
                     $html .= '<div class="ib-head"><span class="index">保</span>' . $v['title'] . '</div>';
                     $html .= '<div class="ib-body">';
                     $html .= '<div class="cl-3"><p><span class="red">' . $v['daily_interest'] . '</span>%</p><p>日化利率</p></div>';
-                    $html .= '<div class="cl-3"><p><span class="red">' . round($v['min_buy_money'] * $v['daily_interest'] / 100, 2) . '</span>元</p><p>每日分红</p></div>';
-                    $html .= '<div class="cl-3"><p><span class="red">' . $v['term'] . '</span>天</p><p>投资期限</p></div>';
+                    $html .= '<div class="cl-3"><p><span class="red">' . round($v['min_buy_money'] * $v['daily_interest'] / 100, 2) . '</span>元</p><p>每份分红</p></div>';
+                    $html .= '<div class="cl-3"><p><span class="red">' . $v['term'] . '</span>';
+					if ($v['dividend_mode'] == 10001) {
+						$html .= '小时';
+					} else {
+						$html .= '天';
+					}
+					$html .= '</p><p>投资期限</p></div>';
                     $html .= '<div class="cl-3"><p>￥<span class="red">' . $v['min_buy_money'] . '</span>元</p><p>起投金额</p></div></div>';
                     if ($v['status'] != 1) {
                         $html .= '<div class="ib-foot"><div class="text"><p>项目规模：' . $v['scale'] . '万元</p><p>' . $v['dividend_mode_text'] . '</p></div><div class="other"><button class="now-btn">立即购买</button></div></div>';

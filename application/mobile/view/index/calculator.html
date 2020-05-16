@@ -39,7 +39,7 @@ window.addEventListener('resize', function() {
 		</div>
 	</div>
 	<div class="am-list-item am-input-autoclear">
-		<div class="am-list-label">投资期限(日)</div>
+		<div class="am-list-label">投资期限</div>
 		<div class="am-list-control">
 			<input id="term" maxlength="3" type="text" placeholder="期望投资期限" value="{$term}" <?php if ($money) { echo ' readonly="readonly"'; } ?>>
 		</div>
@@ -57,7 +57,8 @@ window.addEventListener('resize', function() {
 				<option value="0" <?php if ($dividend_mode == 0) { echo 'selected="selected"'; } ?>>到期还本还息</option>
 				<option value="1" <?php if ($dividend_mode == 1) { echo 'selected="selected"'; } ?>>每日返息，到期还本</option>
 				<option value="7" <?php if ($dividend_mode == 7) { echo 'selected="selected"'; } ?>>每周返息，到期还本</option>
-				<!-- <option value="10000" <?php if ($dividend_mode == 10000) { echo 'selected="selected"'; } ?>>每日复利，保本保息</option> -->
+				<option value="10000" <?php if ($dividend_mode == 10000) { echo 'selected="selected"'; } ?>>每日复利，保本保息</option>
+				<option value="10001" <?php if ($dividend_mode == 10001) { echo 'selected="selected"'; } ?>>每小时返息，到期还本</option>
 			</select>
 		</div>
 		<div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>

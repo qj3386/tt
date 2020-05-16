@@ -50,7 +50,7 @@ window.addEventListener('resize', function() {
     </div>
     <div class="am-list-item">
       <div class="am-list-detailed-label">投资期限</div>
-      <div class="am-list-detailed-content"><?php echo $post['term']; ?>天</div>
+      <div class="am-list-detailed-content"><?php echo $post['term']; ?><?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?></div>
     </div>
     <div class="am-list-item am-list-item-bordered">
       <div class="am-list-detailed-label">投资时间</div>

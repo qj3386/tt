@@ -14,7 +14,7 @@ window.addEventListener('resize', function() {
 });
 </script>
 <link rel="stylesheet" href="/css/antui-all.css"/>
-<link rel="stylesheet" href="/css/mobile/style.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css?v=1"/>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/mobile/public.js"></script>
@@ -33,7 +33,7 @@ window.addEventListener('resize', function() {
 <div class="details_top">
 <?php if ($post['cover']) { ?><img class="cover" src="<?php echo $post['cover']; ?>"><?php } ?>
 <h1><?php echo $post['title']; ?></h1>
-<div style="margin-bottom:8px;"><a class="am-button tiny hover" style="margin-right:6px;">保本保息</a><a class="am-button tiny hover">无手续费</a></div>
+<div style="margin-bottom:8px;"><a class="am-button tiny hover daoxu" style="margin-right:6px;"><?php echo str_reversal('保本保息'); ?></a><a class="am-button tiny hover">无手续费</a></div>
 <ul>
 <li>
     <div class="inner">
@@ -42,12 +42,12 @@ window.addEventListener('resize', function() {
             <span class="span1">￥<i><?php echo $post['scale']; ?></i>万元</span>
         </p>
         <p>
-            <span class="span2">每份分红</span>
+            <span class="span2 daoxu"><?php echo str_reversal('每份分红'); ?></span>
             <span class="span1"><i><?php $daily_earnings = round( ($post['min_buy_money'] * $post['daily_interest']) / 100, 2); echo $daily_earnings; ?></i>元起</span>
         </p>
         <p>
             <span class="span2">投资周期</span>
-            <span class="span1"><i><?php echo $post['term']; ?></i>天</span>
+            <span class="span1"><i><?php echo $post['term']; ?></i><?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?></span>
         </p>
     </div>
 </li>
@@ -55,7 +55,7 @@ window.addEventListener('resize', function() {
 <?php if ($post['max_buy_money'] > 0) { ?><li>最高买入金额：<?php echo $post['max_buy_money']; ?>元</li><?php } ?>
 <li>担保机构：<?php echo $post['guarantee_agency']; ?></li>
 <li>分红方式：<?php echo $post['dividend_mode_text']; ?></li>
-<li style="padding-bottom:0;">投资零风险：100%本金+分红
+<li style="padding-bottom:0;"><span class="daoxu"><?php echo str_reversal('投资零风险：100%本金+分红'); ?></span>
     <div class="progressBox1">
         <div class="progress1" style="width:<?php if ($post['status'] == 1) { echo '100'; } else { echo $post['progress']; } ?>%;"></div>
         <span class="progressNum1"><?php if ($post['status'] == 1) { echo '100'; } else { echo $post['progress']; } ?>%</span>
@@ -83,8 +83,8 @@ window.addEventListener('resize', function() {
                         <td><i><?php echo $post['scale']; ?>万</i>元人民币；</td>
                     </tr>
                     <tr>
-                        <td>每天分红：</td>
-                        <td><i>按每日<?php echo $post['daily_interest']; ?>%的收益（保本保息）</i></td>
+                        <td>每<?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?>分红：</td>
+                        <td><i>按每<?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?><?php echo $post['daily_interest']; ?>%的收益（保本保息）</i></td>
                     </tr>
                     <tr>
                         <td>投资金额：</td>
@@ -92,7 +92,7 @@ window.addEventListener('resize', function() {
                     </tr>
                     <tr>
                         <td>项目期限：</td>
-                        <td><i><?php echo $post['term']; ?>个</i>自然日；</td>
+                        <td><i><?php echo $post['term']; ?>个</i><?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '自然日'; } ?>；</td>
                     </tr>
                     <tr>
                         <td>收益计算：</td>
@@ -120,7 +120,7 @@ window.addEventListener('resize', function() {
                     </tr>
                     <tr>
                         <td>项目概述：</td>
-                        <td>本项目筹集资金<i><?php echo $post['scale']; ?>万</i>元人民币，投资本项目（总收益<i><?php echo $total_revenue; ?>元</i>）项目周期为<i><?php echo $post['term']; ?></i>个自然日，所筹集资金用于该项目直投运作，作为投资者分红固定且无任何风险，所操作一切风险都由公司与担保公司一律承担，投资者不需要承担任何风险。</td>
+                        <td>本项目筹集资金<i><?php echo $post['scale']; ?>万</i>元人民币，投资本项目（总收益<i><?php echo $total_revenue; ?>元</i>）项目周期为<i><?php echo $post['term']; ?></i>个<?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '自然日'; } ?>，所筹集资金用于该项目直投运作，作为投资者分红固定且无任何风险，所操作一切风险都由公司与担保公司一律承担，投资者不需要承担任何风险。</td>
                     </tr>
                       <tr><td>推荐奖励：</td>
                         <td>在会员中心最下面(邀请好友)转发到您朋友圈里,只要您朋友通过邀请二维码注册的为一级,充值并成功投资您就可以得到按投资金额<?php echo sysconfig('CMS_FENXIAO_YIJI'); ?>%的奖励,，这个会员又推荐的会员为二级你就有<?php echo sysconfig('CMS_FENXIAO_ERJI'); ?>%，注册成功，系统自动绑定 ！</td>
@@ -150,7 +150,7 @@ $(".am-tab-item").click(function(){
         <div class="am-button-bottom-container">
             <?php if ($post['status'] == 1) { echo '<button type="button" class="am-button white hover">项目已满</button>'; } else { ?>
             <a href="{:url('index/calculator')}?money=<?php echo $post['min_buy_money']; ?>&term=<?php echo $post['term']; ?>&daily_interest=<?php echo $post['daily_interest']; ?>&dividend_mode=<?php echo $post['dividend_mode']; ?>" class="am-button am-button-bottom-secondary">收益计算</a>
-            <a href="{:url('project/buy')}?id=<?php echo $post['id']; ?>" class="am-button am-button-bottom-primary">马上投资</a><?php } ?>
+            <a href="{:url('project/buy')}?id=<?php echo $post['id']; ?>" class="am-button am-button-bottom-primary daoxu"><?php echo str_reversal('马上投资'); ?></a><?php } ?>
         </div>
     </div>
 </div>

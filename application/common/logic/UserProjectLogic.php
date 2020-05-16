@@ -189,6 +189,38 @@ class UserProjectLogic extends BaseLogic
                 Db::rollback();
                 return ReturnData::create(ReturnData::FAIL);
             }
+        } elseif ($project['dividend_mode'] == 10001) {
+			$expire_time = $time + $project['term'] * 3600; //到期时间
+            $user_project_income_data = [];
+            $total_period_decrement = $project['term'] - 1;
+            for ($x = 1; $x <= $total_period_decrement; $x++) {
+                $temp = [];
+                $temp['user_project_id'] = $user_project_id;
+                $temp['user_id'] = $data['user_id'];
+                $temp['project_id'] = $data['project_id'];
+                $temp['title'] = $project['title'];
+                $temp['is_last'] = 0;
+                $temp['money'] = round((($project['daily_interest'] + $hike) * $data['money']) / 100, 2); //利息
+                $temp['add_time'] = $time + $x * 3600; //应支付利息时间
+                $user_project_income_data[] = $temp;
+            }
+
+            //不规律的最后一期另算
+            $temp = [];
+            $temp['user_project_id'] = $user_project_id;
+            $temp['user_id'] = $data['user_id'];
+            $temp['project_id'] = $data['project_id'];
+            $temp['title'] = $project['title'];
+            $temp['is_last'] = 1;
+            $temp['money'] = round((($project['daily_interest'] + $hike) * ($project['term'] - $total_period_decrement) * $data['money']) / 100, 2); //利息
+            $temp['add_time'] = $expire_time; //应支付利息时间
+            $user_project_income_data[] = $temp;
+            $res = model('UserProjectIncome')->add($user_project_income_data, 2);
+            if (!$res) {
+                // 回滚事务
+                Db::rollback();
+                return ReturnData::create(ReturnData::FAIL);
+            }
         } else {
             $user_project_income_data = [];
             $total_period = ceil($project['term'] / $project['dividend_mode']); //总期数

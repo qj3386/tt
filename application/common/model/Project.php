@@ -342,14 +342,14 @@ class Project extends Base
     }
 
     /**
-     * 还款方式，0到期还本还息，1每日返息到期返本，7每周返息到期返本，10000每日复利到期返本返息
+     * 还款方式，0到期还本还息，1每日返息到期返本，7每周返息到期返本，10000每日复利到期返本返息，10001每小时返息到期返本
      * @param int $value
      * @param array $data
      * @return string
      */
     public function getDividendModeTextAttr($value, $data)
     {
-        $arr = array(0 => '到期还本还息', 1 => '每日返息，到期返本', 7 => '每周返息，到期返本', 10000 => '每日复利，保本保息');
+        $arr = array(0 => '到期还本还息', 1 => '每日返息，到期返本', 7 => '每周返息，到期返本', 10000 => '每日复利，保本保息', 10001 => '每小时返息，到期返本');
         if (isset($arr[$data['dividend_mode']])) {
             return $arr[$data['dividend_mode']];
         }

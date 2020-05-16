@@ -14,7 +14,7 @@ window.addEventListener('resize', function() {
 });
 </script>
 <link rel="stylesheet" href="/css/antui-all.css"/>
-<link rel="stylesheet" href="/css/mobile/style.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css?v=1"/>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/mobile/public.js"></script>
@@ -25,7 +25,7 @@ window.addEventListener('resize', function() {
 <div class="classreturnbox">
 <div class="classreturn">
     <div class="ds-in-bl return"><a href="javascript:history.back(-1);"><img src="<?php echo http_host(); ?>/images/mobile/icon_return3.png" alt="返回"></a></div>
-    <div class="ds-in-bl tit center"><span style="vertical-align:middle;"><?php if (isset($post['name'])) { echo $post['name']; } else { echo '投资项目'; } ?></span></div>
+    <div class="ds-in-bl tit center"><span style="vertical-align:middle;" class="daoxu"><?php if (isset($post['name'])) { echo str_reversal($post['name']); } else { echo str_reversal('投资项目'); } ?></span></div>
 </div>
 </div>
 
@@ -40,28 +40,28 @@ window.addEventListener('resize', function() {
             <div class="ib-body">
                 <div class="cl-3">
                     <p><span class="red"><?php echo $v['daily_interest']; ?></span>%</p>
-                    <p>日化利率</p>
+                    <p class="daoxu"><?php echo str_reversal('日化利率'); ?></p>
                 </div>
                 <div class="cl-3">
                     <p><span class="red"><?php echo round($v['min_buy_money'] * $v['daily_interest'] / 100, 2); ?></span>元</p>
-                    <p>每日分红</p>
+                    <p class="daoxu"><?php echo str_reversal('每份分红'); ?></p>
                 </div>
                 <div class="cl-3">
-                    <p><span class="red"><?php echo $v['term']; ?></span>天</p>
-                    <p>投资期限</p>
+                    <p><span class="red"><?php echo $v['term']; ?></span><?php if ($v['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?></p>
+                    <p class="daoxu"><?php echo str_reversal('投资期限'); ?></p>
                 </div>
                 <div class="cl-3">
                     <p>￥<span class="red"><?php echo $v['min_buy_money']; ?></span>元</p>
-                    <p>起投金额</p>
+                    <p class="daoxu"><?php echo str_reversal('起投金额'); ?></p>
                 </div>
             </div>
             <?php if ($v['status'] != 1) { ?>
             <div class="ib-foot">
                 <div class="text">
                     <p>项目规模：<?php echo $v['scale']; ?>万元</p>
-                    <p><?php echo $v['dividend_mode_text']; ?></p>
+                    <p class="daoxu"><?php echo str_reversal($v['dividend_mode_text']); ?></p>
                 </div>
-                <div class="other"><button class="now-btn">立即购买</button></div>
+                <div class="other"><button class="now-btn daoxu"><?php echo str_reversal('立即购买'); ?></button></div>
             </div>
             <div class="plan">
                 <span>项目进度：</span>

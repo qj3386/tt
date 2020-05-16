@@ -35,11 +35,6 @@ class Index extends Common
      */
     public function index()
     {
-		$add_data['user_id'] = 100002;
-					$add_data['project_id'] = db('project')->where(['min_buy_money'=>['<',50000],'status'=>0,'dividend_mode'=>0])->order(['min_buy_money'=>'desc'])->value('id');
-					$add_data['money'] = 50000;
-					var_dump(logic('UserProject')->add($add_data));
-					exit;
         $uri = $_SERVER["REQUEST_URI"]; //获取当前url的参数
 
         //分享到首页，把推荐码invite_code存下来
@@ -81,8 +76,14 @@ class Index extends Common
                     $html .= '<div class="ib-head"><span class="index">保</span>' . $v['title'] . '</div>';
                     $html .= '<div class="ib-body">';
                     $html .= '<div class="cl-3"><p><span class="red">' . $v['daily_interest'] . '</span>%</p><p>日化利率</p></div>';
-                    $html .= '<div class="cl-3"><p><span class="red">' . round($v['min_buy_money'] * $v['daily_interest'] / 100, 2) . '</span>元</p><p>每日分红</p></div>';
-                    $html .= '<div class="cl-3"><p><span class="red">' . $v['term'] . '</span>天</p><p>投资期限</p></div>';
+                    $html .= '<div class="cl-3"><p><span class="red">' . round($v['min_buy_money'] * $v['daily_interest'] / 100, 2) . '</span>元</p><p>每份分红</p></div>';
+                    $html .= '<div class="cl-3"><p><span class="red">' . $v['term'] . '</span>';
+					if ($v['dividend_mode'] == 10001) {
+						$html .= '小时';
+					} else {
+						$html .= '天';
+					}
+					$html .= '</p><p>投资期限</p></div>';
                     $html .= '<div class="cl-3"><p>￥<span class="red">' . $v['min_buy_money'] . '</span>元</p><p>起投金额</p></div></div>';
                     if ($v['status'] != 1) {
                         $html .= '<div class="ib-foot"><div class="text"><p>项目规模：' . $v['scale'] . '万元</p><p>' . $v['dividend_mode_text'] . '</p></div><div class="other"><button class="now-btn">立即购买</button></div></div>';
@@ -148,7 +149,7 @@ class Index extends Common
         $dividend_mode = $data['dividend_mode'];
 
         $expire_time = $time + $term * 86400; //到期时间
-        //还款方式，0到期还本还息，1每日返息到期返本，7每周返息到期返本，10000每日复利到期返本
+        //还款方式，0到期还本还息，1每日返息到期返本，7每周返息到期返本，10000每日复利到期返本，10001每小时返息到期返本
         if ($dividend_mode == 0) {
             $temp['collection_date'] = $expire_time; //收款日期
             $temp['collection_date'] = date('m-d', $temp['collection_date']);
@@ -162,6 +163,29 @@ class Index extends Common
             $temp['collection_date'] = date('m-d', $temp['collection_date']);
             $temp['amount_received'] = round(pow((1 + $daily_interest * 0.01), $term) * $money, 2); //收款金额
             $temp['interest'] = $temp['amount_received'] - $money; //复利利息
+            $temp['recover_principal'] = $money; //收回本金
+            $temp['remaining_principal'] = 0; //剩余本金
+            $res[] = $temp;
+        } elseif ($dividend_mode == 10001) {
+			$expire_time = $time + $term * 3600; //到期时间
+            $total_period_decrement = $term - 1;
+            for ($x = 1; $x <= $total_period_decrement; $x++) {
+                $temp = [];
+                $temp['collection_date'] = $time + $x * 3600; //收款日期
+                $temp['collection_date'] = date('m-d', $temp['collection_date']);
+                $temp['interest'] = round(($daily_interest * $money) / 100, 2); //利息
+                $temp['amount_received'] = $temp['interest']; //收款金额
+                $temp['recover_principal'] = 0; //收回本金
+                $temp['remaining_principal'] = $money; //剩余本金
+                $res[] = $temp;
+            }
+
+            //不规律的最后一期另算
+            $temp = [];
+            $temp['collection_date'] = $expire_time; //收款日期
+            $temp['collection_date'] = date('m-d', $temp['collection_date']);
+            $temp['interest'] = round(($daily_interest * ($term - $total_period_decrement) * $money) / 100, 2); //利息
+            $temp['amount_received'] = $money + $temp['interest']; //收款金额
             $temp['recover_principal'] = $money; //收回本金
             $temp['remaining_principal'] = 0; //剩余本金
             $res[] = $temp;

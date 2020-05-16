@@ -50,6 +50,7 @@
                 <option<?php if ($post["dividend_mode"] == 0) { echo ' selected="selected"'; } ?> value="0">到期还本还息</option>
                 <option<?php if ($post["dividend_mode"] == 7) { echo ' selected="selected"'; } ?> value="7">按周付收益到期返本</option>
                 <option<?php if ($post["dividend_mode"] == 10000) { echo ' selected="selected"'; } ?> value="10000">每日复利，保本保息</option>
+                <option<?php if ($post["dividend_mode"] == 10001) { echo ' selected="selected"'; } ?> value="10001">每小时返息到期返本</option>
             </select>
         </td>
     </tr>

@@ -16,7 +16,7 @@ window.addEventListener('resize', function() {
 });
 </script>
 <link rel="stylesheet" href="/css/antui-all.css"/>
-<link rel="stylesheet" href="/css/mobile/style.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css?v=1"/>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/mobile/public.js"></script>
@@ -78,7 +78,7 @@ var swiper = new Swiper('.swiper-container', {
 <div class="am-grid am-grid-col-4 am-grid-radius" style="border-top:1px solid #f5f5f5;border-bottom:1px solid #f5f5f5;">
   <a href="<?php echo url('project/index'); ?>" class="am-grid-item">
     <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue13.png" /></div>
-    <div class="am-grid-item-content"><div class="am-grid-item-title">投资项目</div></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title daoxu"><?php echo str_reversal('投资项目'); ?></div></div>
   </a>
   <a href="<?php echo url('page/index'); ?>" class="am-grid-item">
     <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue14.png" /></div>
@@ -94,15 +94,15 @@ var swiper = new Swiper('.swiper-container', {
   </a>
   <a href="<?php echo url('user_recharge/add'); ?>" class="am-grid-item">
     <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue8.png" /></div>
-    <div class="am-grid-item-content"><div class="am-grid-item-title">我要充值</div></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title daoxu"><?php echo str_reversal('我要充值'); ?></div></div>
   </a>
   <a href="<?php echo url('user_withdraw/add'); ?>" class="am-grid-item">
     <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue9.png" /></div>
-    <div class="am-grid-item-content"><div class="am-grid-item-title">我要提现</div></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title daoxu"><?php echo str_reversal('我要提现'); ?></div></div>
   </a>
   <a href="<?php echo url('user_project/index'); ?>" class="am-grid-item">
     <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue11.png" /></div>
-    <div class="am-grid-item-content"><div class="am-grid-item-title">投资记录</div></div>
+    <div class="am-grid-item-content"><div class="am-grid-item-title daoxu"><?php echo str_reversal('投资记录'); ?></div></div>
   </a>
   <a href="<?php echo url('user/referral'); ?>" class="am-grid-item">
     <div class="am-grid-item-thumb"><img src="/images/mobile/icon_blue5.png" /></div>
@@ -129,28 +129,28 @@ var swiper = new Swiper('.swiper-container', {
             <div class="ib-body">
                 <div class="cl-3">
                     <p><span class="red"><?php echo $v['daily_interest']; ?></span>%</p>
-                    <p>日化利率</p>
+                    <p class="daoxu"><?php echo str_reversal('日化利率'); ?></p>
                 </div>
                 <div class="cl-3">
                     <p><span class="red"><?php echo round($v['min_buy_money'] * $v['daily_interest'] / 100, 2); ?></span>元</p>
-                    <p>每日分红</p>
+                    <p class="daoxu"><?php echo str_reversal('每份分红'); ?></p>
                 </div>
                 <div class="cl-3">
-                    <p><span class="red"><?php echo $v['term']; ?></span>天</p>
-                    <p>投资期限</p>
+                    <p><span class="red"><?php echo $v['term']; ?></span><?php if ($v['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?></p>
+                    <p class="daoxu"><?php echo str_reversal('投资期限'); ?></p>
                 </div>
                 <div class="cl-3">
                     <p>￥<span class="red"><?php echo $v['min_buy_money']; ?></span>元</p>
-                    <p>起投金额</p>
+                    <p class="daoxu"><?php echo str_reversal('起投金额'); ?></p>
                 </div>
             </div>
             <?php if ($v['status'] != 1) { ?>
             <div class="ib-foot">
                 <div class="text">
                     <p>项目规模：<?php echo $v['scale']; ?>万元</p>
-                    <p><?php echo $v['dividend_mode_text']; ?></p>
+                    <p class="daoxu"><?php echo str_reversal($v['dividend_mode_text']); ?></p>
                 </div>
-                <div class="other"><button class="now-btn">立即购买</button></div>
+                <div class="other"><button class="now-btn daoxu"><?php echo str_reversal('立即购买'); ?></button></div>
             </div>
             <div class="plan">
                 <span>项目进度：</span>

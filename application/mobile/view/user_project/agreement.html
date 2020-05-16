@@ -83,8 +83,8 @@ function download_agreement () {
 			<td><?php echo $post['money']; ?>元</td>
 		</tr>
 		<tr>
-			<td>投资期限(天)</td>
-			<td><?php echo $post['term']; ?>天</td>
+			<td>投资期限</td>
+			<td><?php echo $post['term']; ?><?php if ($post['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?></td>
 		</tr>
 		<tr>
 			<td>预期收益率</td>
@@ -92,15 +92,15 @@ function download_agreement () {
 		</tr>
 		<tr>
 			<td>起息日</td>
-			<td><?php echo date("Y-m-d", ($post['add_time'] + 3600 * 24)); ?></td>
+			<td><?php if ($post['dividend_mode'] == 10001) { echo date("Y-m-d", ($post['add_time'] + 3600)); } else { echo date("Y-m-d", ($post['add_time'] + 3600 * 24)); } ?></td>
 		</tr>
 		<tr>
 			<td>到期日</td>
-			<td><?php echo date("Y-m-d", ($post['add_time'] + 3600 * 24 * $post['term'])); ?></td>
+			<td><?php if ($post['dividend_mode'] == 10001) { echo date("Y-m-d", ($post['add_time'] + 3600 * $post['term'])); } else { echo date("Y-m-d", ($post['add_time'] + 3600 * 24 * $post['term'])); } ?></td>
 		</tr>
 		<tr>
-			<td>应收本息(天)</td>
-			<td><?php if ($post['dividend_mode'] != 10000) { ?><?php echo round( ( $post['money'] +  ($post['money'] * ($post['daily_interest'] + $post['hike'])) * 0.01 * $post['term'] ), 2 ); ?>元；<?php } else { ?><?php echo round(pow((1 + ($post['daily_interest'] + $post['hike']) * 0.01), $post['term']) * $post['money'], 2); ?>元；<?php } ?></td>
+			<td>应收本息</td>
+			<td><?php if ($post['dividend_mode'] != 10000) { ?><?php echo round( ( $post['money'] +  ($post['money'] * ($post['daily_interest'] + $post['hike'])) * 0.01 * $post['term'] ), 2 ); ?>元<?php } else { ?><?php echo round(pow((1 + ($post['daily_interest'] + $post['hike']) * 0.01), $post['term']) * $post['money'], 2); ?>元<?php } ?></td>
 		</tr>
 		<tr>
 			<td>还款方式</td>

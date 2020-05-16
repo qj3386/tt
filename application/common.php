@@ -602,3 +602,14 @@ function mobile_number_encrypt($mobile)
 
     return $mobile;
 }
+
+// 字符串倒叙
+function str_reversal($str)
+{
+	$len = mb_strlen($str);
+    $t2 = '';
+	for ($i = $len-1;$i >= 0;$i--) {
+		$t2 = $t2 . mb_substr($str, $i, 1, 'utf-8');
+	}
+    return $t2;
+}
