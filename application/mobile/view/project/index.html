@@ -44,7 +44,7 @@ window.addEventListener('resize', function() {
                 </div>
                 <div class="cl-3">
                     <p><span class="red"><?php echo round($v['min_buy_money'] * $v['daily_interest'] / 100, 2); ?></span>元</p>
-                    <p class="daoxu"><?php echo str_reversal('每份分红'); ?></p>
+                    <p class="daoxu"><?php if ($v['dividend_mode'] == 10001) { echo str_reversal('每小时分红'); } else { echo str_reversal('每份分红'); } ?></p>
                 </div>
                 <div class="cl-3">
                     <p><span class="red"><?php echo $v['term']; ?></span><?php if ($v['dividend_mode'] == 10001) { echo '小时'; } else { echo '天'; } ?></p>

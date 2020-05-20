@@ -1,0 +1,76 @@
+{extend name="public/base" /}
+{block name="title"}兑换记录修改{/block}
+
+{block name="content"}
+<h5 class="sub-header"><a href="{:url('index')}">兑换记录列表</a> > 兑换记录修改</h5>
+
+<form id="addarc" method="post" action="{:url('edit')}" role="form" enctype="multipart/form-data" class="table-responsive">
+<input name="id" type="text" value="{$post['id']}" style="display:none;" />
+<input name="user_id" type="text" value="{$post['user_id']}" style="display:none;" />
+<table class="table table-striped table-bordered">
+<tbody>
+    <tr>
+        <td align="right"><font color="red">*</font>内容：</td>
+        <td><input autocomplete="off" name="content" type="text" id="content" value="{$post['content']}" class="required" style="width:60%" placeholder="在此输入关键词"></td>
+    </tr>
+    <tr>
+        <td align="right">收货地址：</td>
+        <td><input autocomplete="off" name="address" type="text" id="address" value="{$post['address']}" style="width:60%"></td>
+    </tr>
+    <tr>
+        <td align="right">快递单号：</td>
+        <td><input autocomplete="off" name="tracking_number" type="text" id="tracking_number" value="{$post['tracking_number']}" style="width:60%"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><button type="submit" class="btn btn-success" value="Submit">保存(Submit)</button>&nbsp;&nbsp;<button type="reset" class="btn btn-default" value="Reset">重置(Reset)</button></td>
+    </tr>
+</tbody></table></form><!-- 表单结束 -->
+
+<script>
+$(function(){
+    $(".required").blur(function(){
+        var $parent = $(this).parent();
+        $parent.find(".formtips").remove();
+        if(this.value=="")
+        {
+            $parent.append(' <small class="formtips onError"><font color="red">不能为空！</font></small>');
+        }
+        else
+        {
+            $parent.append(' <small class="formtips onSuccess"><font color="green">OK</font></small>');
+        }
+    });
+
+    //重置
+    $('#addarc input[type="reset"]').click(function(){
+            $(".formtips").remove(); 
+    });
+
+    $("#addarc").submit(function(){
+        $(".required").trigger('blur');
+        var numError = $('#addarc .onError').length;
+        
+        if(numError){return false;}
+        
+        /* $.ajax({
+            url: "/fladmin/Slide/doedit",
+            type: "POST",
+            dataType: "json",
+            cache: false,
+            data: {
+                "id":$("#id").val(),
+                "webname":$("#webname").val(),
+                "url":$("#url").val()
+            },
+            success: function(data){
+                if(data.code==1)
+                {
+                    //alert(data.info);
+                    window.location.replace("/fladmin/Slide");
+                }
+            }
+        }); */
+    });
+});
+</script>
+{/block}

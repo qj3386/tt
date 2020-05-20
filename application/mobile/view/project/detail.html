@@ -148,7 +148,7 @@ $(".am-tab-item").click(function(){
 <div style="height:60px;border-top:1px solid #efefef;z-index:99999;">
     <div class="am-fixed am-fixed-bottom">
         <div class="am-button-bottom-container">
-            <?php if ($post['status'] == 1) { echo '<button type="button" class="am-button white hover">项目已满</button>'; } else { ?>
+            <?php if ($post['status'] == 1) { echo '<button type="button" class="am-button white hover">项目已满</button>'; } elseif ($post['is_buy'] == 0) { echo '<button type="button" class="am-button white hover">敬请期待</button>'; } else { ?>
             <a href="{:url('index/calculator')}?money=<?php echo $post['min_buy_money']; ?>&term=<?php echo $post['term']; ?>&daily_interest=<?php echo $post['daily_interest']; ?>&dividend_mode=<?php echo $post['dividend_mode']; ?>" class="am-button am-button-bottom-secondary">收益计算</a>
             <a href="{:url('project/buy')}?id=<?php echo $post['id']; ?>" class="am-button am-button-bottom-primary daoxu"><?php echo str_reversal('马上投资'); ?></a><?php } ?>
         </div>

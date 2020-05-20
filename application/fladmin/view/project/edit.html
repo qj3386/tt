@@ -23,6 +23,13 @@
 		</td>
     </tr>
     <tr>
+        <td align="right">是否可以购买：</td>
+        <td>
+			<input type="radio" value='0' name="is_buy" {if condition="$post['is_buy']==0"}checked{/if} />&nbsp;不可以&nbsp;&nbsp;
+			<input type="radio" value='1' name="is_buy" {if condition="$post['is_buy']==1"}checked{/if} />&nbsp;可以
+		</td>
+    </tr>
+    <tr>
         <td align="right"><font color="red">*</font>项目分类：</td>
         <td>
             <select name="type_id" id="type_id">
