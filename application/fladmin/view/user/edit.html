@@ -2,6 +2,7 @@
 {block name="title"}会员信息修改{/block}
 
 {block name="content"}
+<script language="javascript" type="text/javascript" src="<?php echo http_host(); ?>/js/My97DatePicker/WdatePicker.js"></script>
 <h5 class="sub-header"><a href="<?php echo url('user/index'); ?>">会员列表</a> > 会员信息修改</h5>
 
 <form id="addarc" method="post" action="" role="form" enctype="multipart/form-data" class="table-responsive">
@@ -63,6 +64,10 @@
     <tr>
         <td align="right">是否显示理财：</td>
         <td><input name="is_licai" type="text" id="is_licai" value="<?php echo $post["is_licai"]; ?>" style="width:30%">1显示理财，0商城</td>
+    </tr>
+    <tr>
+        <td align="right">解锁时间：</td>
+        <td><input autocomplete="off" name="unlock_time" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" id="unlock_time" style="width:185px" value="<?php if($post['unlock_time']!=0){echo date('Y-m-d H:i:s',$post['unlock_time']);} ?>"></td>
     </tr>
     <tr>
         <td align="right">状态：</td>

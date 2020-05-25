@@ -200,6 +200,7 @@ class UserLogic extends BaseLogic
      */
     public function login($data)
     {
+		$time = time();
         //验证数据
         $validate = new Validate([
             ['user_name', 'require|max:30', '账号不能为空|账号不能超过30个字符'],
@@ -227,6 +228,9 @@ class UserLogic extends BaseLogic
         }
 
 		if ($user['status'] == 2) {
+			if ($user['unlock_time'] > $time) {
+				return ReturnData::create(ReturnData::PARAMS_ERROR, null, '解锁时间：' . date('Y-m-d H:i', $user['unlock_time']));
+			}
             return ReturnData::create(ReturnData::PARAMS_ERROR, null, '该账户已被锁定，请联系人工客服处理');
         }
 		if ($user['status'] == 1) {
@@ -235,7 +239,7 @@ class UserLogic extends BaseLogic
 
         //更新登录时间
         $edit_user_data['user_agent'] = mb_strcut($this->getOS(), 0, 60, 'UTF-8');
-        $edit_user_data['login_time'] = time();
+        $edit_user_data['login_time'] = $time;
         $edit_user_data['login_ip'] = Helper::getRemoteIp();
         $this->getModel()->edit($edit_user_data, ['id' => $user['id']]);
 

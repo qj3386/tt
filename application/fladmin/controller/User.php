@@ -88,6 +88,9 @@ class User extends Base
         if (Helper::isPostRequest()) {
             $where['id'] = $_POST['id'];
             unset($_POST['id']);
+			if ($_POST['unlock_time']) {
+                $_POST['unlock_time'] = strtotime($_POST['unlock_time']);
+            }
 
             $res = $this->getLogic()->userInfoUpdate($_POST, $where);
             if ($res['code'] == ReturnData::SUCCESS) {
