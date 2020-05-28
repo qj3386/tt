@@ -18,6 +18,7 @@ window.addEventListener('resize', function() {
 <link rel="stylesheet" href="/css/antui-all.css"/>
 <link rel="stylesheet" href="/css/mobile/style.css?v=1"/>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/layer/mobile/layer.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/mobile/public.js"></script>
 {include file="common/header"/}
@@ -291,6 +292,20 @@ $(function(){
 .active_window .aw_img > img{ display: block; margin: auto; width: 100%; }
 .active_window .aw_close{ width: 40px; height: 40px; position: fixed; left: 50%; margin-left: -20px; bottom: 80px; z-index: 9999992; background-image: url('/images/mobile/icon_active_close.png'); background-size: 40px;}
 </style>
+<?php } ?>
+
+<?php if (sysconfig('CMS_HOME_POPUP_ANNOUNCEMENT')) { ?>
+<script>
+//询问框
+layer.open({
+	content: '<?php echo sysconfig('CMS_HOME_POPUP_ANNOUNCEMENT'); ?>'
+	,btn: ['确定', '取消']
+	,yes: function(index){
+		//location.reload();
+		layer.close(index);
+	}
+});
+</script>
 <?php } ?>
 
 {include file="common/footer"/}
