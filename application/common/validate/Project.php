@@ -25,7 +25,7 @@ class Project extends Validate
         ['max_buy_money', 'require|number|max:11|egt:0', '最高买入金额必须是数字|最高买入金额格式不正确|最高买入金额格式不正确'],
         ['stock', 'number|max:11', '投资人数必须是数字|投资人数格式不正确'],
         ['dividend_mode', 'require|number|max:11|egt:0', '还款方式不能为空|还款方式必须是数字|还款方式格式不正确|还款方式格式不正确'],
-        ['is_repeat', 'in:0,1', '是否可以复投，0可以，1不可以'],
+        ['buy_limit_num', 'require|number|max:11', '限买份数不能为空|限买份数必须是数字|限买份数格式不正确'],
         ['daily_interest', 'require|regex:/^\d{1,3}(\.\d{0,4})?$/', '日化收益不能为空|日化收益不正确'],
         ['term', 'require|number|max:11|>=:dividend_mode', '产品期限不能为空|产品期限必须是数字|产品期限格式不正确|产品期限格式不正确'],
         ['sale', 'number|max:11', '销量必须是数字|销量格式不正确'],

@@ -88,7 +88,7 @@ window.addEventListener('resize', function() {
                     </tr>
                     <tr>
                         <td>投资金额：</td>
-                        <td><i>最低起投<?php echo $post['min_buy_money']; ?>元</i><?php if ($post['is_repeat'] == 1) { ?>（限买1份）<?php } ?></td>
+                        <td><i>最低起投<?php echo $post['min_buy_money']; ?>元</i><?php if ($post['buy_limit_num'] > 0) { ?>（限买<?php echo $post['buy_limit_num']; ?>份）<?php } ?></td>
                     </tr>
                     <tr>
                         <td>项目期限：</td>

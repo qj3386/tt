@@ -74,10 +74,9 @@
         <td><input name="distribution_yiji" type="text" id="distribution_yiji" value="<?php if($post["distribution_yiji"] > 0) { echo $post["distribution_yiji"]; } ?>" style="width:100px">% &nbsp;&nbsp; 二级分销奖励：<input name="distribution_erji" type="text" id="distribution_erji" value="<?php if($post["distribution_erji"] > 0) { echo $post["distribution_erji"]; } ?>" style="width:100px">%</td>
     </tr>
     <tr>
-        <td align="right">是否复投：</td>
+        <td align="right">限买份数：</td>
         <td>
-			<input type="radio" value='0' name="is_repeat" {if condition="$post['is_repeat']==0"}checked{/if} />&nbsp;可以复投&nbsp;&nbsp;
-			<input type="radio" value='1' name="is_repeat" {if condition="$post['is_repeat']==1"}checked{/if} />&nbsp;不可以复投
+			<input name="buy_limit_num" type="text" id="buy_limit_num" style="width:80px" value="<?php echo $post["buy_limit_num"]; ?>"> 0为不限制&nbsp;&nbsp; 
 		</td>
     </tr>
     <tr>

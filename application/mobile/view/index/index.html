@@ -297,14 +297,17 @@ $(function(){
 <?php if (sysconfig('CMS_HOME_POPUP_ANNOUNCEMENT')) { ?>
 <script>
 //询问框
-layer.open({
-	content: '<?php echo sysconfig('CMS_HOME_POPUP_ANNOUNCEMENT'); ?>'
-	,btn: ['确定', '取消']
-	,yes: function(index){
-		//location.reload();
-		layer.close(index);
-	}
-});
+if (sessionStorage.getItem('home_popup_announcement_hide') != 1) {
+	layer.open({
+		content: '<?php echo sysconfig('CMS_HOME_POPUP_ANNOUNCEMENT'); ?>'
+		,btn: ['确定', '取消']
+		,yes: function(index){
+			//location.reload();
+			sessionStorage.setItem('home_popup_announcement_hide', '1');
+			layer.close(index);
+		}
+	});
+}
 </script>
 <?php } ?>
 

@@ -123,10 +123,11 @@ class UserProjectLogic extends BaseLogic
         if ($project['status'] == 1) {
             return ReturnData::create(ReturnData::FAIL, null, '项目已满');
         }
-        //判断用户是否复投
-        if ($project['is_repeat'] == 1) {
-            if ($this->getModel()->getOne(['user_id' => $data['user_id'], 'project_id' => $data['project_id']])) {
-                return ReturnData::create(ReturnData::FAIL, null, '该项目限投一份，您已投过该项目');
+        //限买份数，0不限
+        if ($project['buy_limit_num'] > 0) {
+			$buy_limit_num = $this->getModel()->getCount(['user_id' => $data['user_id'], 'project_id' => $data['project_id']]);
+            if ($buy_limit_num >= $project['buy_limit_num']) {
+                return ReturnData::create(ReturnData::FAIL, null, '该项目限投' . $project['buy_limit_num'] . '份');
             }
         }
 
