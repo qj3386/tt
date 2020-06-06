@@ -349,7 +349,7 @@ class Project extends Base
      */
     public function getDividendModeTextAttr($value, $data)
     {
-        $arr = array(0 => '到期还本还息', 1 => '每日返息，到期返本', 7 => '每周返息，到期返本', 10000 => '每日复利，保本保息', 10001 => '每小时返息，到期返本');
+        $arr = array(0 => '到期还本还息', 1 => '每日返息，到期返本', 7 => '每周返息，到期返本', 10000 => '每日复利，到期返本', 10001 => '每小时返息，到期返本');
         if (isset($arr[$data['dividend_mode']])) {
             return $arr[$data['dividend_mode']];
         }

@@ -52,7 +52,7 @@ window.addEventListener('resize', function() {
     </div>
 </li>
 <li>起投金额：<?php echo $post['min_buy_money']; ?>元</li>
-<?php if ($post['max_buy_money'] > 0) { ?><li>最高买入金额：<?php echo $post['max_buy_money']; ?>元</li><?php } ?>
+<?php if ($post['max_buy_money'] > 10) { ?><li>最高买入金额：<?php echo $post['max_buy_money']; ?>元</li><?php } ?>
 <li>担保机构：<?php echo $post['guarantee_agency']; ?></li>
 <li>分红方式：<?php echo $post['dividend_mode_text']; ?></li>
 <li style="padding-bottom:0;"><span class="daoxu"><?php echo str_reversal('投资零风险：100%本金+分红'); ?></span>

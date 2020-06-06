@@ -20,6 +20,9 @@
             <input id="end_date" name="end_date" autocomplete="off" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd'})" size="10" type="text" class="form-control" placeholder="结束时间">
         </div>
         <button type="submit" class="btn btn-success">查询</button>
+		
+		<div class="form-group" style="margin-left:100px;"><input type="text" name="keyword" id="keyword" class="form-control required" placeholder="搜索关键词..."></div>
+		<button type="submit" class="btn btn-info" value="Submit">搜索一下</button>
     </div>
     <div style="clear:both;"></div>
 </div>
@@ -49,10 +52,6 @@
 <td><a href="{:url('user/edit')}?id=<?php echo $row['user_id']; ?>">会员详情</a> <a href="<?php echo url('user_project/index').'?user_id='.$row['user_id']; ?>">投资记录</a> <a href="<?php echo url('user_money/index').'?user_id='.$row['user_id']; ?>">流水记录</a> <?php if ($row['status'] == 0) { ?><a onclick="delconfirm('{:url('change_status')}?status=1&id=<?php echo $row["id"]; ?>')" href="javascript:;">成功</a> <a onclick="delconfirm('{:url('change_status')}?status=2&id=<?php echo $row["id"]; ?>')" href="javascript:;">失败</a> <a onclick="delconfirm('{:url('del')}?id=<?php echo $row["id"]; ?>')" href="javascript:;">删除</a> <?php if ($row["is_ignore"] == 0) { ?><a onclick="delconfirm('{:url('ignore')}?id=<?php echo $row["id"]; ?>')" href="javascript:;">忽略</a><?php } ?><?php } ?></td>
 </tr><?php }} ?>
 </tbody></table></div><!-- 表格结束 --></form><!-- 表单结束 -->
-
-<form id="searcharc" class="navbar-form" action="{:url('index')}" method="get">
-<div class="form-group"><input type="text" name="keyword" id="keyword" class="form-control required" placeholder="搜索关键词..."></div>
-<button type="submit" class="btn btn-info" value="Submit">搜索一下</button></form>
 
 <div class="backpages">{$page}</div>
 {/block}

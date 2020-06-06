@@ -117,6 +117,7 @@ class UserProjectLogic extends BaseLogic
         }
 		if ($project['max_buy_money'] != 0) {
             if ($data['money'] > $project['max_buy_money']) {
+				return ReturnData::create(ReturnData::FAIL, null, '您暂不能投资此项目');
 				return ReturnData::create(ReturnData::FAIL, null, '投资金额不能大于最高买入金额' . $project['max_buy_money']);
 			}
         }

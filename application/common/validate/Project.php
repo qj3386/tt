@@ -27,7 +27,7 @@ class Project extends Validate
         ['dividend_mode', 'require|number|max:11|egt:0', '还款方式不能为空|还款方式必须是数字|还款方式格式不正确|还款方式格式不正确'],
         ['buy_limit_num', 'require|number|max:11', '限买份数不能为空|限买份数必须是数字|限买份数格式不正确'],
         ['daily_interest', 'require|regex:/^\d{1,3}(\.\d{0,4})?$/', '日化收益不能为空|日化收益不正确'],
-        ['term', 'require|number|max:11|>=:dividend_mode', '产品期限不能为空|产品期限必须是数字|产品期限格式不正确|产品期限格式不正确'],
+        ['term', 'require|number|max:11', '产品期限不能为空|产品期限必须是数字|产品期限格式不正确|产品期限格式不正确'],
         ['sale', 'number|max:11', '销量必须是数字|销量格式不正确'],
         ['distribution_yiji', 'regex:/^\d{1,3}(\.\d{0,2})?$/|>=:0|<=:100', '一级分销奖励格式不正确，一级分销奖励只能带2位小数的数字|一级分销奖励不能小于0|一级分销奖励不能大于100'],
         ['distribution_erji', 'regex:/^\d{1,3}(\.\d{0,2})?$/|>=:0|<=:100', '二级分销奖励格式不正确，二级分销奖励只能带2位小数的数字|二级分销奖励不能小于0|二级分销奖励不能大于100'],
