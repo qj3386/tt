@@ -80,6 +80,15 @@
 		</td>
     </tr>
     <tr>
+        <td align="right">是否能提现：</td>
+        <td>
+		<select name="is_can_withdraw" id="is_can_withdraw">
+            <option<?php if($post["is_can_withdraw"]==0){ echo ' selected'; } ?> value="0">不能</option>
+            <option<?php if($post["is_can_withdraw"]==1){ echo ' selected'; } ?> value="1">能</option>
+		</select>
+		</td>
+    </tr>
+    <tr>
         <td align="right">会员等级：</td>
         <td><?php echo $post["user_rank_text"]; ?></td>
     </tr>
