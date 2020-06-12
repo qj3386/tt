@@ -94,6 +94,8 @@ class User extends Base
 
             $res = $this->getLogic()->userInfoUpdate($_POST, $where);
             if ($res['code'] == ReturnData::SUCCESS) {
+				//修改用户等级
+				logic('User')->user_rank_calculation($where['id']);
                 $this->success($res['msg'], url('index'), '', 1);
             }
 

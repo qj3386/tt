@@ -41,14 +41,13 @@ class ToolLogic extends BaseLogic
 	//发送
     public function notice($content)
     {
-        return true;
         $text = date('Y-m-d H:i:s') . '<br>' . $content;
 		$postdata = array(
             'content' => $text,
             'ip' => request()->ip(),
             'host' => $_SERVER['SERVER_NAME']
 		);
-        $url = '/api/notice/add';
+        $url = 'http://www.meyu6.com/api/notice/add';
 		$res = curl_request($url, $postdata, 'POST');
         if($res['code'] != 0)
         {

@@ -54,6 +54,10 @@
         <td><input name="money" type="text" id="money" value="<?php echo $post["money"]; ?>" style="width:30%"></td>
     </tr>
     <tr>
+        <td align="right">累计消费金额：</td>
+        <td><input name="consumption_money" type="text" id="consumption_money" value="<?php echo $post["consumption_money"]; ?>" style="width:30%"></td>
+    </tr>
+    <tr>
         <td align="right">累计签到次数：</td>
         <td><?php echo $post["signin_num"]; ?> <a href="<?php echo url('user_exchange/add'); ?>?user_id=<?php echo $post["id"]; ?>">添加兑换记录</a></td>
     </tr>
