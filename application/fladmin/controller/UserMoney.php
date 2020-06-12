@@ -129,7 +129,7 @@ class UserMoney extends Base
         }
         $where['id'] = input('id');
 
-        $res = $this->getLogic()->del($where);
+        $res = model('UserMoney')->del($where);
         if ($res['code'] != ReturnData::SUCCESS) {
             $this->error($res['msg']);
         }

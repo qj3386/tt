@@ -80,6 +80,15 @@
 		</td>
     </tr>
     <tr>
+        <td align="right">是否自动复投：</td>
+        <td>
+		<select name="is_auto_reinvest" id="is_auto_reinvest">
+            <option<?php if($post["is_auto_reinvest"]==0){ echo ' selected'; } ?> value="0">否</option>
+            <option<?php if($post["is_auto_reinvest"]==1){ echo ' selected'; } ?> value="1">是</option>
+		</select>
+		</td>
+    </tr>
+    <tr>
         <td align="right">是否能提现：</td>
         <td>
 		<select name="is_can_withdraw" id="is_can_withdraw">

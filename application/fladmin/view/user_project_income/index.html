@@ -12,6 +12,7 @@
 <th>投资人</th>
 <th>返款金额</th>
 <th>项目名称</th>
+<th>操作</th>
 </tr></thead>
 <tbody>
 <?php if ($list) { foreach ($list as $row) { ?><tr>
@@ -20,6 +21,7 @@
 <td><a href="{:url('index')}?user_id=<?php echo $row['user_id']; ?>"><?php echo mobile_number_encrypt($row['user']['mobile']); ?> <?php echo $row['user']['true_name']; ?></a></td>
 <td><font color="red"><?php if ($row['is_last']) { echo $row['money'] + $row['user_project']['money']; } else { echo $row['money']; } ?></font></td>
 <td><a href="{:url('index')}?project_id=<?php echo $row['project_id']; ?>"><?php echo $row['title']; ?></a></td>
+<td><a onclick="delconfirm('<?php echo url('del').'?id='.$row['id']; ?>')" href="javascript:;">删除</a></td>
 </tr><?php }} ?>
 </tbody></table></div><!-- 表格结束 --></form><!-- 表单结束 -->
 

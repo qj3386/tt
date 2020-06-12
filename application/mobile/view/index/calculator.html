@@ -57,6 +57,7 @@ window.addEventListener('resize', function() {
 				<option value="0" <?php if ($dividend_mode == 0) { echo 'selected="selected"'; } ?>>到期还本还息</option>
 				<option value="1" <?php if ($dividend_mode == 1) { echo 'selected="selected"'; } ?>>每日返息，到期还本</option>
 				<option value="7" <?php if ($dividend_mode == 7) { echo 'selected="selected"'; } ?>>每周返息，到期还本</option>
+				<option value="30" <?php if ($dividend_mode == 30) { echo 'selected="selected"'; } ?>>每月返息，到期还本</option>
 				<option value="10000" <?php if ($dividend_mode == 10000) { echo 'selected="selected"'; } ?>>每日复利，保本保息</option>
 				<option value="10001" <?php if ($dividend_mode == 10001) { echo 'selected="selected"'; } ?>>每小时返息，到期还本</option>
 			</select>
