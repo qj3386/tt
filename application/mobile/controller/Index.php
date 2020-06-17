@@ -240,6 +240,12 @@ class Index extends Common
         return $this->fetch();
     }
 
+	//营销页面
+    public function yingxiao()
+    {
+        return $this->fetch();
+    }
+
     //XML地图
     public function sitemap()
     {

