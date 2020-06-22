@@ -31,7 +31,8 @@ class Login extends Controller
             $this->error('验证码错误');
         }
 
-        $res = logic('Admin')->login($_POST);
+		$data = input('post.');
+        $res = logic('Admin')->login($data);
         if ($res['code'] === ReturnData::SUCCESS) {
             session('admin_info', $res['data']);
             $this->success('登录成功', url('fladmin/index/index'), '', 1);
