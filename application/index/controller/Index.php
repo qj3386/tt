@@ -19,6 +19,11 @@ class Index extends Base
             //Helper::http404();
 			header('Location: ' . url('mobile/index/index'));exit;
         }
+		if (sysconfig('CMS_IS_OPEN_PC') == 0) {
+			header("HTTP/1.1 404 Not Found");
+			header("Status: 404 Not Found");
+			exit;
+		}
 		return $this->fetch();
     }
 

@@ -104,6 +104,7 @@ class Index extends Common
         $slide_list = cache("mobile_index_index_slide_list");
         if (!$slide_list) {
             $where_slide['status'] = 0;
+			$where_slide['group_id'] = 0;
             $slide_list = logic('Slide')->getAll($where_slide, 'listorder asc', '*', 5);
             cache("index_index_index_slide_list", $slide_list, 3600 * 24 * 30); //1天
         }
@@ -243,6 +244,17 @@ class Index extends Common
 	//营销页面
     public function yingxiao()
     {
+		if (sysconfig('CMS_IS_JUMP_FINANCE') == 1) {
+			header('Location: ' . url('mobile/index/index'));
+			exit;
+		}
+		//轮播图
+        $where_slide['status'] = 0;
+        $where_slide['group_id'] = 2;
+        $slide_list = logic('Slide')->getAll($where_slide, 'listorder asc', '*', 5);
+        $assign_data['slide_list'] = $slide_list;
+        //dd($assign_data);
+        $this->assign($assign_data);
         return $this->fetch();
     }
 

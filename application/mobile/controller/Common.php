@@ -22,6 +22,11 @@ class Common extends CommonController
         parent::_initialize();
 
 		if (!Helper::is_mobile_access()) {
+			if (sysconfig('CMS_IS_OPEN_PC') == 0) {
+				header("HTTP/1.1 404 Not Found");
+				header("Status: 404 Not Found");
+				exit;
+			}
             header('Location: /'); exit;
         }
 

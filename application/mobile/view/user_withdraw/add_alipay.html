@@ -34,7 +34,7 @@ window.addEventListener('resize', function() {
 </style>
 <div class="yongjin_tip">余额：<b>￥<?php echo $login_info['money']; ?></b>，提现最少金额：<b>￥<?php echo $min_withdraw_money; ?></b></div>
 
-<form class="ajax_post_submit" id="myform" method="post" action="{:url('user_withdraw/add')}" role="form">{:token()}
+<form class="ajax_post_submit" id="myform" method="post" action="{:url('user_withdraw/add_alipay')}" role="form">{:token()}
 
 <div class="am-list am-list-form" style="padding-bottom:0;">
   <div class="am-list-item am-input-autoclear">
@@ -42,8 +42,8 @@ window.addEventListener('resize', function() {
     <div class="am-list-control" style="color:#999;">9:00 ~ 23:00</div>
   </div>
   <div class="am-list-item am-input-autoclear">
-    <div class="am-list-label">提现银行</div>
-    <div class="am-list-control" style="color:#999;">{$login_info['bank_name']} <?php echo substr_replace($login_info['bank_card_number'],'********',4,8); ?></div>
+    <div class="am-list-label">提现账户</div>
+    <div class="am-list-control"><input id="account" name="account" type="text" placeholder="请输入支付宝账户" value=""></div>
   </div>
 </div>
 
@@ -77,10 +77,6 @@ window.addEventListener('resize', function() {
 
 <div style="padding:15px 20px 15px 20px;"><a href="javascript:dosubmit();" class="am-button" role="button">确认提现</a></div>
 </form>
-
-<div class="box reg">
-<span style="float:right;margin-right:20px;"><a href="<?php echo url('add_alipay'); ?>">提现到支付宝</a></span>
-</div><br><br>
 
 <script>
 // 监听输入金额

@@ -46,7 +46,7 @@
 <td><a href="{:url('index')}?user_id=<?php echo $row['user_id']; ?>"><?php echo mobile_number_encrypt($row['user']['mobile']); ?></a></td>
 <td><font color="red"><?php echo $row['money']; ?></font></td>
 <td><a href="{:url('user/edit')}?id=<?php echo $row['user_id']; ?>"><?php echo $row['name']; ?></a></td>
-<td>卡号：<?php echo $row['account']; if($row['bank_name']){echo '<br>银行名称：'.$row['bank_name'];}if($row['bank_place']){echo '<br>开户行：'.$row['bank_place'];} ?></td>
+<td>账号：<?php echo $row['account']; if($row['bank_name']){echo '<br>银行名称：'.$row['bank_name'];}if($row['bank_place']){echo '<br>开户行：'.$row['bank_place'];} ?></td>
 <td><?php echo date('Y-m-d H:i:s', $row['add_time']); ?></td>
 <td style="width:220px;word-wrap:break-word;white-space:normal;word-break:break-all;">{$row['re_note']|default="-"}</td>
 <td><a href="{:url('index')}?status=<?php echo $row['status']; ?>" style="<?php if ($row['status'] == 2) { echo 'color:green;'; } elseif ($row['status'] == 4) { echo 'color:red;'; } ?>"><?php echo $row['status_text']; ?></a></td>

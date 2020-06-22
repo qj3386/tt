@@ -30,7 +30,7 @@ window.addEventListener('resize', function() {
             <div class="am-list-content">
                 <div class="am-list-title am-list-cell-twocolumn">
                     <div class="am-list-title" style="color:#fff;margin-bottom:0;"><a style="color:#fff;" href="<?php echo url('user/setting'); ?>"><?php if ($login_info['true_name']) { echo $login_info['true_name']; } elseif ($login_info['mobile']) { echo substr_replace($login_info['mobile'],'****',3,4); } else { echo $login_info['user_name']; } ?></a>
-					<?php if (!empty($login_info['true_name']) && !empty($login_info['idcard'])) { if (!empty($login_info['user_rank_text'])) { ?><a href="{:url('page/detail')}?id=huiyuandengji" style="color:#FFCC00;font-size:12px;"><?php if (!empty($login_info['user_rank_text'])) { echo $login_info['user_rank_text']; } ?></a><?php } } else { ?><a style="color:#e8a010;font-size:12px;" href="{:url('user/certification')}">未认证</a><?php } ?></div>
+					<?php if (!empty($login_info['true_name']) && !empty($login_info['idcard'])) { if (!empty($login_info['user_rank_text'])) { ?><a href="javascript:;" style="color:#FFCC00;font-size:12px;"><?php if (!empty($login_info['user_rank_text'])) { echo $login_info['user_rank_text']; } ?></a><?php } } else { ?><a style="color:#e8a010;font-size:12px;" href="{:url('user/certification')}">未认证</a><?php } ?></div>
                     <div class="am-list-right-brief"></div>
                 </div>
                 <div class="am-list-brief" style="color:#99CCFF;">注册时间：<?php echo date('Y-m-d', $login_info['add_time']); ?></div>
@@ -40,7 +40,7 @@ window.addEventListener('resize', function() {
     </div>
 </div>
 
-<?php if ((!empty($login_info) && ($login_info['add_time'] < (time() - sysconfig('CMS_REGISTER_JUMP_MONRY_TIMES')))) || (!empty($login_info) && $login_info['is_licai'] == 1)) { ?>
+<?php if (sysconfig('CMS_IS_JUMP_FINANCE') == 1) { ?>
 <div class="am-grid am-grid-col-3">
   <a href="{:url('user_money/index')}" class="am-grid-item">
     <div class="am-grid-item-content">
@@ -82,7 +82,7 @@ window.addEventListener('resize', function() {
       <div class="am-grid-item-title">签到</div>
     </div>
   </a>
-  <?php if ((!empty($login_info) && ($login_info['add_time'] < (time() - sysconfig('CMS_REGISTER_JUMP_MONRY_TIMES')))) || (!empty($login_info) && $login_info['is_licai'] == 1)) { ?>
+  <?php if (sysconfig('CMS_IS_JUMP_FINANCE') == 1) { ?>
   <a href="{:url('user_recharge/add')}" class="am-grid-item">
     <div class="am-grid-item-thumb" style="margin-bottom:8px;">
         <img src="/images/mobile/icon_nav11.png" />
@@ -101,7 +101,7 @@ window.addEventListener('resize', function() {
             <div class="am-list-content">资金管理</div>
             <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
         </a>
-        <?php if ((!empty($login_info) && ($login_info['add_time'] < (time() - sysconfig('CMS_REGISTER_JUMP_MONRY_TIMES')))) || (!empty($login_info) && $login_info['is_licai'] == 1)) { ?>
+        <?php if (sysconfig('CMS_IS_JUMP_FINANCE') == 1) { ?>
         <a href="<?php echo url('user_project/index'); ?>" class="am-list-item am-list-item-indent line-thumb">
             <div class="am-list-thumb"><img src="/images/mobile/user_invest.png" alt=""></div>
             <div class="am-list-content">投资记录</div>
@@ -115,6 +115,16 @@ window.addEventListener('resize', function() {
         <a href="<?php echo url('user_recharge/index'); ?>" class="am-list-item am-list-item-indent line-thumb">
             <div class="am-list-thumb"><img src="/images/mobile/user_rech.png" alt=""></div>
             <div class="am-list-content">充值记录</div>
+            <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+        </a>
+        <a href="<?php echo url('page/detail'); ?>?id=weixinchognzhi" class="am-list-item am-list-item-indent line-thumb">
+            <div class="am-list-thumb"><img src="/images/mobile/icon_pay_weixin.gif" alt=""></div>
+            <div class="am-list-content">微信支付方式</div>
+            <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
+        </a>
+        <a href="<?php echo url('page/detail'); ?>?id=zhifubaochongzhi" class="am-list-item am-list-item-indent line-thumb">
+            <div class="am-list-thumb"><img src="/images/mobile/icon_pay_zhifubao.gif" alt=""></div>
+            <div class="am-list-content">支付宝支付方式</div>
             <div class="am-list-arrow" aria-hidden="true"><span class="am-icon arrow horizontal"></span></div>
         </a>
 		<?php } ?>

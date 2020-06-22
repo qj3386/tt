@@ -122,4 +122,52 @@ class UserWithdraw extends Base
         return $this->fetch();
     }
 
+    //提现
+    public function add_alipay()
+    {
+        $this->is_certification();
+
+        if (Helper::isPostRequest()) {
+			$today_timestamp = strtotime(date('Y-m-d')); //今天日期时间戳
+			$current_timestamp = time();
+			//提现时间段9:00-23:00
+			if ($current_timestamp > ($today_timestamp + 9 * 3600) && $current_timestamp < ($today_timestamp + 23 * 3600)) {
+				
+			} else {
+				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, '提现时间9:00 ~ 23:00，请稍后再试'));
+			}
+			if ($this->login_info['is_can_withdraw'] == 0) {
+				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, sysconfig('CMS_CAN_NOT_WITHDRAW_TEXT')));
+			}
+			
+            $data = input('post.');
+            $data['user_id'] = $this->login_info['id'];
+            $data['name'] = $this->login_info['true_name'];
+            $data['money'] = $data['money'];
+            $data['method'] = 'alipay'; //提现方式，weixin，bank，alipay
+            $data['status'] = 1; //提现状态：0未处理,1处理中,2成功,3取消，4拒绝
+            $res = $this->getLogic()->add($data);
+            if ($res['code'] != ReturnData::SUCCESS) {
+                Util::echo_json($res);
+            }
+
+            $res['url'] = url('user/index');
+            Util::echo_json($res);
+        }
+
+        $res = logic('User')->getUserInfo(['id' => $this->login_info['id']]);
+        $this->login_info = array_merge($this->login_info, $res);
+        session('mobile_user_info', $this->login_info);
+        $this->assign('login_info', $this->login_info);
+
+        //是否达到可提现要求，0否
+        $assign_data['is_withdraw'] = 0;
+        $assign_data['min_withdraw_money'] = sysconfig('CMS_MIN_WITHDRAWAL_MONEY'); //最低可提现金额
+        if ($this->login_info['money'] >= $assign_data['min_withdraw_money']) {
+            $assign_data['is_withdraw'] = 1;
+        }
+
+        $this->assign($assign_data);
+        return $this->fetch();
+    }
 }
