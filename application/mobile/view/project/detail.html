@@ -16,6 +16,7 @@ window.addEventListener('resize', function() {
 <link rel="stylesheet" href="/css/antui-all.css"/>
 <link rel="stylesheet" href="/css/mobile/style.css?v=1"/>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/layer/mobile/layer.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/mobile/public.js"></script>
 {include file="common/header"/}
@@ -32,7 +33,7 @@ window.addEventListener('resize', function() {
 <div class="detail">
 <div class="details_top">
 <?php if ($post['cover']) { ?><img class="cover" src="<?php echo $post['cover']; ?>"><?php } ?>
-<h1><?php echo $post['title']; ?></h1>
+<h1><?php echo $post['title']; ?><?php if ($post['sell_point']) { ?><font style="margin-right:8px;float:right;color:red;" onclick="aaa()">!</font><?php } ?></h1>
 <div style="margin-bottom:8px;"><a class="am-button tiny hover daoxu" style="margin-right:6px;"><?php echo str_reversal('保本保息'); ?></a><a class="am-button tiny hover">无手续费</a></div>
 <ul>
 <li>
@@ -154,6 +155,20 @@ $(".am-tab-item").click(function(){
         </div>
     </div>
 </div>
+
+<script>
+//询问框
+function aaa() {
+	layer.open({
+		content: '<?php echo $post['sell_point']; ?>'
+		,btn: ['确定', '取消']
+		,yes: function(index){
+			//location.reload();
+			layer.close(index);
+		}
+	});
+}
+</script>
 
 <div style="display:none;"><?php echo sysconfig('CMS_SITE_ANALYTICS'); ?></div>
 </body></html>
