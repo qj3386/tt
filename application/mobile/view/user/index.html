@@ -64,7 +64,6 @@ window.addEventListener('resize', function() {
 <?php } ?>
 
 <div class="am-grid am-grid-col-3" style="margin-top:10px;">
-  <?php if (sysconfig('CMS_IS_CAN_WITHDRAW')) { ?>
   <a href="{:url('user_withdraw/add')}" class="am-grid-item">
     <div class="am-grid-item-thumb" style="margin-bottom:8px;">
         <img src="/images/mobile/icon_qq6.png" />
@@ -73,7 +72,6 @@ window.addEventListener('resize', function() {
       <div class="am-grid-item-title">提现</div>
     </div>
   </a>
-  <?php } ?>
   <a href="<?php echo url('user/signin'); ?>" class="am-grid-item">
     <div class="am-grid-item-thumb" style="margin-bottom:8px;">
         <img src="/images/mobile/icon_nav4.png" />

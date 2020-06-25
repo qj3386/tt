@@ -84,6 +84,11 @@ class UserWithdraw extends Base
 			} else {
 				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, '提现时间9:00 ~ 23:00，请稍后再试'));
 			}
+			
+			if (sysconfig('CMS_IS_CAN_WITHDRAW') == 0) {
+				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, sysconfig('CMS_CAN_NOT_WITHDRAW_TEXT')));
+			}
+			
 			if ($this->login_info['is_can_withdraw'] == 0) {
 				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, sysconfig('CMS_CAN_NOT_WITHDRAW_TEXT')));
 			}
@@ -136,6 +141,11 @@ class UserWithdraw extends Base
 			} else {
 				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, '提现时间9:00 ~ 23:00，请稍后再试'));
 			}
+			
+			if (sysconfig('CMS_IS_CAN_WITHDRAW') == 0) {
+				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, sysconfig('CMS_CAN_NOT_WITHDRAW_TEXT')));
+			}
+			
 			if ($this->login_info['is_can_withdraw'] == 0) {
 				Util::echo_json(ReturnData::create(ReturnData::FAIL, null, sysconfig('CMS_CAN_NOT_WITHDRAW_TEXT')));
 			}

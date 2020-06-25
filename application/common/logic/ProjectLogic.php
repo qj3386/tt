@@ -103,9 +103,9 @@ class ProjectLogic extends BaseLogic
 			$data['description'] = mb_strcut($data['description'],0,240,'UTF-8');
         }
 		//卖点最多150个字符
-		if (isset($data['sell_point']) && !empty($data['sell_point'])) {
+		/* if (isset($data['sell_point']) && !empty($data['sell_point'])) {
 			$data['sell_point'] = mb_strcut($data['sell_point'],0,150,'UTF-8');
-        }
+        } */
 		//担保机构最多150个字符
 		if (isset($data['guarantee_agency']) && !empty($data['guarantee_agency'])) {
 			$data['guarantee_agency'] = mb_strcut($data['guarantee_agency'],0,150,'UTF-8');
@@ -156,9 +156,9 @@ class ProjectLogic extends BaseLogic
 			$data['description'] = mb_strcut($data['description'],0,240,'UTF-8');
         }
 		//卖点最多150个字符
-		if (isset($data['sell_point']) && !empty($data['sell_point'])) {
+		/* if (isset($data['sell_point']) && !empty($data['sell_point'])) {
 			$data['sell_point'] = mb_strcut($data['sell_point'],0,150,'UTF-8');
-        }
+        } */
 		//担保机构最多150个字符
 		if (isset($data['guarantee_agency']) && !empty($data['guarantee_agency'])) {
 			$data['guarantee_agency'] = mb_strcut($data['guarantee_agency'],0,150,'UTF-8');

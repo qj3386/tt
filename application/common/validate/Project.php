@@ -40,8 +40,8 @@ class Project extends Validate
     ];
 
     protected $scene = [
-        'add' => ['type_id', 'tuijian', 'click', 'title', 'litpic', 'keywords', 'seotitle', 'description', 'sell_point', 'guarantee_agency', 'scale', 'progress', 'min_buy_money', 'max_buy_money', 'stock', 'dividend_mode', 'is_repeat', 'daily_interest', 'term', 'sale', 'status', 'user_id', 'shop_id', 'listorder', 'add_time', 'update_time'],
-        'edit' => ['type_id', 'tuijian', 'click', 'title', 'litpic', 'keywords', 'seotitle', 'description', 'sell_point', 'guarantee_agency', 'scale', 'progress', 'min_buy_money', 'max_buy_money', 'stock', 'dividend_mode', 'is_repeat', 'daily_interest', 'term', 'sale', 'status', 'user_id', 'shop_id', 'listorder', 'update_time'],
+        'add' => ['type_id', 'tuijian', 'click', 'title', 'litpic', 'keywords', 'seotitle', 'description', 'guarantee_agency', 'scale', 'progress', 'min_buy_money', 'max_buy_money', 'stock', 'dividend_mode', 'is_repeat', 'daily_interest', 'term', 'sale', 'status', 'user_id', 'shop_id', 'listorder', 'add_time', 'update_time'],
+        'edit' => ['type_id', 'tuijian', 'click', 'title', 'litpic', 'keywords', 'seotitle', 'description', 'guarantee_agency', 'scale', 'progress', 'min_buy_money', 'max_buy_money', 'stock', 'dividend_mode', 'is_repeat', 'daily_interest', 'term', 'sale', 'status', 'user_id', 'shop_id', 'listorder', 'update_time'],
         'del' => ['id'],
     ];
 }
